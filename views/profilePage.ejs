@@ -1,0 +1,19 @@
+<%- include('layouts/header', { stylesheets: ['navbar', 'profilePage'] }) %>
+<script src="/javascripts/hamburger.js" defer></script>
+<%- include('layouts/navbar', {user}) %>
+<main>
+  <div class="profile-container">
+    <div class="profile-picture">
+      <img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Pic">
+    </div>
+    <div class="profile-details">
+      <h1><%= user.username %></h1>
+      <p>@<%= user.username %></p>
+      <a href="/edit-profile" class="btn">Customize Profile</a>
+    </div>
+  </div>
+</main>
+
+</body>
+
+</html>

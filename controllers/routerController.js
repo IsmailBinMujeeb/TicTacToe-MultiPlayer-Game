@@ -7,6 +7,26 @@ const homeRout = (req, res) => {
     res.render('homePage', { user });
 }
 
+const profileRouter = (req, res)=>{
+    let user = req.isAuthenticated() ? req.user : null;
+    res.render('profilePage', {user});
+}
+
+const editProfileRout = (req, res)=>{
+    let user = req.isAuthenticated() ? req.user : null;
+    res.render('editProfile', {user});
+}
+
+const uploadPostRout = async (req, res) => {
+    try {
+        const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${req.file.destination}/${req.file.filename}` }, { new: true });
+        req.user = user;
+        res.redirect('/profile');
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
+}
+
 const loginRout = (req, res) => {
     let err = req.flash('error');
     res.render('loginPage', { err });
@@ -67,4 +87,4 @@ const logoutRout = (req, res) => {
     });
 }
 
-module.exports = { homeRout, loginRout, regiterRout, registerPostRout, logoutRout }
+module.exports = { homeRout, profileRouter, editProfileRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }

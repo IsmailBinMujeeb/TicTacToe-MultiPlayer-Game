@@ -10,7 +10,7 @@
   </div>
   <div class="navbar-profile">
     <% if (user) { %>
-    <img src="<%= user.profilePic %>" alt="Profile Picture">
+      <a href="/profile"><img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Picture"></a>
     <% } else { %>
     <div class="navbar-links">
       <a href="/login">Login</a>
@@ -24,8 +24,8 @@
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#">Home</a>
-  <a href="#">Leaderboard</a>
-  <a href="#">Room</a>
-  <a href="#">About Us</a>
+  <a href="/">Home</a>
+  <a href="/rank">Leaderboard</a>
+  <a href="/room">Room</a>
+  <a href="/aboutus">About Us</a>
 </div>

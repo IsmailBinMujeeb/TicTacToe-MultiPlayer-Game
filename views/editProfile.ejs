@@ -1,0 +1,26 @@
+<%- include('layouts/header', { stylesheets: ['navbar', 'editProfile']}) %>
+<script src="/javascripts/editProfileChange.js" defer></script>
+<script src="/javascripts/hamburger.js" defer></script>
+<%- include('layouts/navbar', { user }) %>
+<main>
+  <div class="edit-profile-container">
+    <div class="edit-profile-header">
+      <h1>Edit Profile</h1>
+    </div>
+    <form method="post" action="upload" enctype="multipart/form-data">
+        <div class="profile-picture">
+            <img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Picture">
+            <label for="profile-pic-input">Change Profile Picture</label>
+            <input type="file" id="profile-pic-input" name="file">
+          </div>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" value="<%= user.username %>">
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</main>
+
+</body>
+
+</html>
