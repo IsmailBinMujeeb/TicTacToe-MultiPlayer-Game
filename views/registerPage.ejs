@@ -1,0 +1,32 @@
+<%- include('layouts/header', { stylesheets: ['registerPage']}) %>
+
+<div class="signup-container">
+  <div class="signup-header">
+    <h1>Create an Account</h1>
+    <% if (err) { %>
+        <p class="flash-message"><%= err %></p>
+    <% } %>
+  </div>
+  <form class="signup-form" method="post" action="/signup">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+    <label for="name">Username</label>
+    <input type="text" id="username" name="username" placeholder="Username" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Create a password" required>
+
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+
+    <button type="submit" class="signup-button">Sign Up</button>
+  </form>
+  <div class="signup-footer">
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</div>
+<%- include('layouts/footer') %>

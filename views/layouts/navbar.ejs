@@ -9,7 +9,13 @@
     <a href="#">About Us</a>
   </div>
   <div class="navbar-profile">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Jogo_da_velha_-_tic_tac_toe.png" alt="Profile Picture">
+    <% if (user) { %>
+    <img src="<%= user.profilePic %>" alt="Profile Picture">
+    <% } else { %>
+    <div class="navbar-links">
+      <a href="/login">Login</a>
+    </div>
+    <% } %>
   </div>
   <div class="hamburger" id="hamburger">
     <div></div>
