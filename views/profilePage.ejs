@@ -4,12 +4,15 @@
 <main>
   <div class="profile-container">
     <div class="profile-picture">
-      <img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Pic">
+      <img src="<%= userProfile.profilePic.replace('/public', '') %>" alt="Profile Pic">
     </div>
     <div class="profile-details">
-      <h1><%= user.username %></h1>
-      <p>@<%= user.username %></p>
+      <h1><%= userProfile.name %></h1>
+      <p>@<%= userProfile.username %></p>
+      <% if (userProfile.username == user.username) { %>
       <a href="/edit-profile" class="btn">Customize Profile</a>
+      <% } %>
+
     </div>
   </div>
 </main>

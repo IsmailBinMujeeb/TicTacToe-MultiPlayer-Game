@@ -1,0 +1,38 @@
+<%- include('layouts/header', {stylesheets: ['roomPage']}) %>
+<div id="game-container">
+  <h1>Tic Tac Toe</h1>
+  <div id="game-board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+  <div id="status">Player X's turn</div>
+</div>
+
+<div id="waiting-container">
+  <div class="waiting-message">Waiting for another player to join...</div>
+  <div class="loader">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <button class="cancel-button" onclick="cancelWaiting()">Cancel</button>
+</div>
+
+<div class="custom-alert-overlay" id="custom-alert">
+  <div class="custom-alert">
+    <h1 id="alert-message">Game Over</h1>
+    <button id="ok-button">OK</button>
+  </div>
+</div>
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+<script src="/javascripts/gameClient.js"></script>
+</body>
+
+</html>

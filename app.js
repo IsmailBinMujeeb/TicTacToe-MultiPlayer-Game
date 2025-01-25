@@ -1,10 +1,12 @@
 const express = require('express');
 const session = require('express-session');
 const conn = require('./config/db');
+const socketio = require('socket.io');
+const { createServer } = require('http');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
-const flash = require('connect-flash')
+const flash = require('connect-flash');
 const path = require('path');
 require('dotenv').config();
 
@@ -14,11 +16,49 @@ const routes = require('./routes/routes');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const server = createServer(app);
+const io = socketio(server);
+
+io.on("connection", (socket) => {
+    socket.on('join-room', (roomId) => {
+        const room = io.sockets.adapter.rooms.get(roomId) || new Set();
+
+        if (room.size == 0) {
+            socket.join(roomId);
+            socket.emit('player-joined', { roomId, player: 'X' });
+            io.to(roomId).emit('load-waiting-window');
+        } else if (room.size == 1) {
+            socket.join(roomId);
+            socket.emit('player-joined', { roomId, player: 'O' });
+            io.to(roomId).emit('start-game', { roomId });
+            io.to(roomId).emit('load-game-board');
+        }
+
+    })
+
+    socket.on('player-click', ({ index, roomId, player }) => {
+        
+        io.to(roomId).emit('make-changes', { index, player });
+    })
+
+    socket.on('next-turn', ({ nextTurn, roomId })=>{
+        io.to(roomId).emit('set-turn', { nextTurn });
+    })
+
+    socket.on('player-won', ({ playerWon, roomId })=>{
+        io.to(roomId).emit('game-over', {playerWon});
+    })
+
+    socket.on('draw', ({roomId})=>{
+        io.to(roomId).emit('game-draw');
+    })
+});
+
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(flash())
 
 app.use(session({
@@ -31,10 +71,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(async (username, password, done)=>{
+passport.use(new LocalStrategy(async (username, password, done) => {
     try {
         const regExpUsername = new RegExp(`^${username}$`, 'i');
-        
+
         const user = await userModel.findOne({ username: regExpUsername });
 
         if (!user) {
@@ -42,7 +82,7 @@ passport.use(new LocalStrategy(async (username, password, done)=>{
         }
 
         if (!user.password) {
-            return done(null, false, { message: "Login with Google"})
+            return done(null, false, { message: "Login with Google" })
         }
 
         bcrypt.compare(password, user.password, (err, isMatch) => {
@@ -72,4 +112,4 @@ passport.deserializeUser(async (id, done) => {
 
 app.use('/', routes);
 
-app.listen(PORT, ()=>{console.log(`Running at http://localhost:3000`)});
+server.listen(PORT, () => { console.log(`Running at http://localhost:3000`) });

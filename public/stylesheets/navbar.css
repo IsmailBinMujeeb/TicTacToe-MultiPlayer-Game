@@ -81,6 +81,17 @@
     color: #007BFF;
 }
 
+#start-play-btn{
+    background-color: #007BFF;
+    color: #ffffff;
+    padding: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 5em;
+    bottom: 5em;
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
     .navbar-links {
         display: none;

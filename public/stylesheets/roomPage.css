@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#game-container {
+    text-align: center;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 1rem 0;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: black;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #d1d5db;
+}
+
+#status {
+    font-size: 1rem;
+    margin: 1rem 0;
+    color: #374151;
+}
+
+#reset-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: #0056b3;
+}
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.custom-alert-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.custom-alert {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+}
+
+.custom-alert h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.custom-alert button {
+    padding: 0.8rem 1.2rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-alert button:hover {
+    background-color: #0056b3;
+}
+
+#waiting-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.waiting-message {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.loader div {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    animation: loaderAnimation 1.2s infinite ease-in-out;
+}
+
+.loader div:nth-child(1) {
+    animation-delay: -0.4s;
+}
+
+.loader div:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.loader div:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes loaderAnimation {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+.cancel-button {
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #f44336;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+
+    .custom-alert h1 {
+        font-size: 1.5rem;
+    }
+
+    .custom-alert button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .waiting-message {
+        font-size: 1.5rem;
+    }
+
+    .loader div {
+        width: 12px;
+        height: 12px;
+        margin: 0 4px;
+    }
+
+    .cancel-button {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem;
+    }
+}
+

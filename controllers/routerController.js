@@ -7,21 +7,35 @@ const homeRout = (req, res) => {
     res.render('homePage', { user });
 }
 
-const profileRouter = (req, res)=>{
-    let user = req.isAuthenticated() ? req.user : null;
-    res.render('profilePage', {user});
+const profileRouter = async (req, res) => {
+    const username = req.query.user;
+    const regUsername = new RegExp(`^${username}$`, 'i');
+    const userProfile = await userModel.findOne({username: regUsername});
+    const user = req.isAuthenticated() ? req.user : null;
+
+    if (!userProfile) {
+        return res.status(404).send({message: '404 user not found.'});
+    }
+    res.render('profilePage', { user, userProfile });
 }
 
-const editProfileRout = (req, res)=>{
+const editProfileRout = (req, res) => {
     let user = req.isAuthenticated() ? req.user : null;
-    res.render('editProfile', {user});
+    res.render('editProfile', { user });
 }
 
 const uploadPostRout = async (req, res) => {
     try {
-        const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${req.file.destination}/${req.file.filename}` }, { new: true });
-        req.user = user;
-        res.redirect('/profile');
+
+        if (req.file) {
+            const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${req.file.destination}/${req.file.filename}`, name: req.body.name }, { new: true });
+            req.user = user;
+        } else {
+            const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { name: req.body.name }, { new: true });
+            req.user = user;
+        }
+
+        res.redirect('/profile?user=' + req.user.username);
     } catch (err) {
         res.status(500).send({ error: err.message });
     }
@@ -40,7 +54,7 @@ const regiterRout = (req, res) => {
 const registerPostRout = async (req, res, next) => {
 
     try {
-        const { fullname, email, username, password } = req.body;
+        const { name, email, username, password } = req.body;
 
         const regExpUsername = new RegExp(`^${username}$`, 'i');
 
@@ -64,7 +78,7 @@ const registerPostRout = async (req, res, next) => {
 
             const newUser = await userModel.create({
 
-                fullname,
+                name,
                 username,
                 email,
                 password: hash
