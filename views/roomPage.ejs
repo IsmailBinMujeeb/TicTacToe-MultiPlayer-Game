@@ -1,5 +1,9 @@
 <%- include('layouts/header', {stylesheets: ['roomPage']}) %>
 <div id="game-container">
+  <div class="players-container">
+    <img src="https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg" alt="player-x" id="player-x">
+    <img src="https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg" alt="player-o" id="player-o">
+  </div>
   <h1>Tic Tac Toe</h1>
   <div id="game-board">
     <div class="cell" data-index="0"></div>
@@ -27,6 +31,7 @@
 
 <div class="custom-alert-overlay" id="custom-alert">
   <div class="custom-alert">
+    <img src="/images/coin.gif" alt="" id="coin-gif">
     <h1 id="alert-message">Game Over</h1>
     <button id="ok-button">OK</button>
   </div>

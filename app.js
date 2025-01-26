@@ -11,47 +11,98 @@ const path = require('path');
 require('dotenv').config();
 
 const userModel = require('./models/user-model');
+const roomModel = require('./models/room-model');
 const routes = require('./routes/routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const server = createServer(app);
-const io = socketio(server);
+const io = socketio(server, {
+    transports: ['websocket'],
+    pingInterval: 10000,
+    pingTimeout: 5000,
+});
 
 io.on("connection", (socket) => {
-    socket.on('join-room', (roomId) => {
+    socket.on('join-room', async ({roomId, userId}) => {
         const room = io.sockets.adapter.rooms.get(roomId) || new Set();
 
         if (room.size == 0) {
             socket.join(roomId);
             socket.emit('player-joined', { roomId, player: 'X' });
-            io.to(roomId).emit('load-waiting-window');
+
+            const user = await userModel.findOne({_id: userId});
+
+            io.to(roomId).emit('load-waiting-window', user);
+            io.emit('room-created', {roomId, user});
+
+            const newRoom = await roomModel.create({roomId: roomId, username: user.username, userid: user._id, userPic: user.profilePic.replace('./public', '')});
         } else if (room.size == 1) {
             socket.join(roomId);
             socket.emit('player-joined', { roomId, player: 'O' });
             io.to(roomId).emit('start-game', { roomId });
-            io.to(roomId).emit('load-game-board');
+
+            const user = await userModel.findOne({_id: userId});
+
+            io.to(roomId).emit('load-game-board', user);
+            io.emit('room-full', {roomId});
+
+            await roomModel.findOneAndDelete({ roomId });
         }
 
     })
 
-    socket.on('player-click', ({ index, roomId, player }) => {
+    socket.on('req-sync-profile-pic', ({roomId, xPlayer, oPlayer})=>{
         
+        io.to(roomId).emit('sync-profile-pic', { xPlayer, oPlayer });
+    })
+
+    socket.on('player-click', ({ index, roomId, player }) => {
+
         io.to(roomId).emit('make-changes', { index, player });
     })
 
-    socket.on('next-turn', ({ nextTurn, roomId })=>{
+    socket.on('next-turn', ({ nextTurn, roomId }) => {
         io.to(roomId).emit('set-turn', { nextTurn });
     })
 
-    socket.on('player-won', ({ playerWon, roomId })=>{
-        io.to(roomId).emit('game-over', {playerWon});
+    socket.on('player-won', async ({ playerWon, currentPlayer, roomId, userId }) => {
+
+
+        if (playerWon == currentPlayer) await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } });
+        else await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -2 } });
+        io.to(roomId).emit('game-over', { playerWon });
     })
 
-    socket.on('draw', ({roomId})=>{
+    socket.on('draw', ({ roomId }) => {
         io.to(roomId).emit('game-draw');
     })
+
+    socket.on("destroy-room", (roomId) => {
+        const room = io.sockets.adapter.rooms.get(roomId);
+
+        if (room) {
+            
+            io.to(roomId).emit("room-destroyed", { roomId });
+
+            room.forEach((socketId) => {
+                const memberSocket = io.sockets.sockets.get(socketId);
+                if (memberSocket) {
+                    memberSocket.leave(roomId);
+                }
+            });
+        }
+    });
+
+    socket.on('disconnecting', (reason) => {
+
+        const rooms = [...socket.rooms].filter(room => room !== socket.id);
+
+        rooms.forEach((room) => {
+            io.to(room).emit('player-disconnected', { socketId: socket.id });
+        })
+    });
 });
 
 app.set('view engine', 'ejs');

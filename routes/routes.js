@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const passport = require('passport');
-const {isAuthenticated} = require('../utils/isAuthenticated');
-const { homeRout, profileRouter, editProfileRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout } = require('../controllers/routerController');
+const { isAuthenticated } = require('../utils/isAuthenticated');
+const { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout } = require('../controllers/routerController');
 const upload = require('../middlewares/multerMiddleware');
-const userModel = require('../models/user-model');
-const crypto = require('crypto')
 
 router.get('/', homeRout);
 
@@ -12,15 +10,14 @@ router.get('/profile', isAuthenticated, profileRouter);
 
 router.get('/edit-profile', isAuthenticated, editProfileRout);
 
-router.get('/room', (req, res)=>{
-    const roomId = crypto.randomBytes(4).toString('hex');
-    res.redirect(`/room/${roomId}`);
-})
+router.get('/room', isAuthenticated, roomRout)
 
-router.get('/room/:roomid', (req, res)=>{
+// When a user join a room he will redirect to this rout first to get the correct user id.
+router.get('/room/:roomId', isAuthenticated, room_roomidRout)
 
-    res.render('roomPage');
-})
+router.get('/room/:roomid/:userId', room_roomid_useridRout)
+
+router.get('/waitingrooms', waitingRoomsRout)
 
 router.get('/login', loginRout);
 

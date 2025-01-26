@@ -1,33 +1,23 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const roomSchema = new mongoose.Schema({
 
-    name: {
+    roomId: {
         type: String,
     }, 
 
-    email: {
-        type: String,
-    },
-
-    password: {
-        type: String,
-    },
-
     username: {
         type: String,
-        unique: true,
     },
 
-    profilePic: {
+    userid: {
+        type: String,
+    },
+
+    userPic: {
         type: String,
         default: 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg'
-    },
-
-    coins: {
-        type: Number,
-        defualt: 10,
     }
 })
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('room', roomSchema);

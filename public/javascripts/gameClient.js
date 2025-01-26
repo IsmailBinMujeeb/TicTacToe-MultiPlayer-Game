@@ -1,8 +1,10 @@
 function showAlert(message, redirectUrl) {
     const alertOverlay = document.getElementById("custom-alert");
+    const coinGif = document.getElementById('coin-gif');
     const alertMessage = document.getElementById("alert-message");
     const okButton = document.getElementById("ok-button");
 
+    if (message != 'You Won!') coinGif.src = '';
     alertMessage.textContent = message;
     alertOverlay.classList.add("active");
 
@@ -11,34 +13,46 @@ function showAlert(message, redirectUrl) {
     });
 }
 
-const socket = io();
-const roomId = window.location.pathname.split('/').pop();
-
-socket.emit('join-room', roomId);
-
-socket.on('load-waiting-window', ()=>{
-    document.getElementById('game-container').style.display = 'none';
-    document.getElementById('waiting-container').style.display = 'block';
-})
-
-socket.on('load-game-board', ()=>{
-    document.getElementById('waiting-container').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
-})
-
-const cells = document.querySelectorAll(".cell");
-const statusText = document.getElementById("status");
-const resetButton = document.getElementById("reset-button");
+const socket = io({ transports: ['websocket'] });
+const data = window.location.pathname.split('/');
+const userId = data.pop();
+const roomId = data.pop();
 
 let currentPlayer = "";
 let currentTurn = "";
 let board = ["", "", "", "", "", "", "", "", ""];
 let isGameActive = true;
 
+if(roomId != 'waitingrooms') socket.emit('join-room', {roomId, userId});
+
+socket.on('load-waiting-window', (user) => {
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('waiting-container').style.display = 'block';
+    document.getElementById('player-x').src = user.profilePic.replace('./public', '');
+})
+
+socket.on('load-game-board', (user) => {
+    document.getElementById('waiting-container').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+    document.getElementById('player-o').src = user.profilePic.replace('./public', '');
+
+    if (currentPlayer == 'X') socket.emit('req-sync-profile-pic', { roomId, xPlayer: document.getElementById('player-x').src, oPlayer: user.profilePic.replace('./public', '') })
+})
+
+const cells = document.querySelectorAll(".cell");
+const statusText = document.getElementById("status");
+const resetButton = document.getElementById("reset-button");
+
 socket.on('player-joined', ({ roomid, player }) => {
     console.log(roomId, player)
     currentPlayer = player;
     currentTurn = 'X'
+})
+
+socket.on('sync-profile-pic', ({ xPlayer, oPlayer })=>{
+    document.getElementById('player-x').src = xPlayer;
+    document.getElementById('player-o').src = oPlayer;
+    console.log(xPlayer, oPlayer)
 })
 
 socket.on('start-game', ({ roomId }) => {
@@ -87,7 +101,7 @@ socket.on('start-game', ({ roomId }) => {
         }
 
         if (roundWon) {
-            socket.emit('player-won', { playerWon: currentTurn, roomId })
+            socket.emit('player-won', { playerWon: currentTurn, currentPlayer, roomId, userId })
             return;
         }
 
@@ -125,10 +139,22 @@ socket.on('start-game', ({ roomId }) => {
         let result = playerWon == currentPlayer ? 'Won' : 'Lost'
         showAlert(`You ${result}!`, '/');
         isGameActive = false;
+
+        socket.emit('destroy-room', roomId);
     })
 
     socket.on('game-draw', () => {
         showAlert('Draw', '/');
         isGameActive = false;
+
+        socket.emit('destroy-room', roomId);
+    })
+
+    socket.on('player-disconnected', ({ socketId })=>{
+        if(socketId != socket.id){
+            showAlert('You Won', '/');
+            isGameActive = false;
+            socket.emit('destroy-room', roomId);
+        }
     })
 });

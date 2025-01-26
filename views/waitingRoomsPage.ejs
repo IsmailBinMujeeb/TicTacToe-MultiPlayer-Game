@@ -1,0 +1,19 @@
+<%- include('layouts/header', { stylesheets: ['style', 'navbar', 'waitingroom'] }) %>
+<%- include('layouts/navbar', { user }) %>
+<body>
+  <div class="card-list" id="cardList">
+    <% rooms.forEach(room => { %>
+        <div class="card" data-id="<%= room.roomId %>">
+            <img src="<%= room.userPic %>" alt="Profile Picture">
+            <h3><%= room.username %></h3>
+            <a href='/room/<%= room.roomId %>'>Join</a>
+        </div>
+
+    <% }) %>
+  </div>
+
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
+  <script src="/javascripts/waitingRoom.js"></script>
+</body>
+
+</html>

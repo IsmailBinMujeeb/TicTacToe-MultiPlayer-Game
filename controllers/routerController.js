@@ -1,5 +1,7 @@
 const userModel = require('../models/user-model');
-const bcrypt = require('bcryptjs')
+const roomModel = require('../models/room-model');
+const crypto = require('crypto')
+const bcrypt = require('bcryptjs');
 
 const homeRout = (req, res) => {
 
@@ -10,11 +12,11 @@ const homeRout = (req, res) => {
 const profileRouter = async (req, res) => {
     const username = req.query.user;
     const regUsername = new RegExp(`^${username}$`, 'i');
-    const userProfile = await userModel.findOne({username: regUsername});
+    const userProfile = await userModel.findOne({ username: regUsername });
     const user = req.isAuthenticated() ? req.user : null;
 
     if (!userProfile) {
-        return res.status(404).send({message: '404 user not found.'});
+        return res.status(404).send({ message: '404 user not found.' });
     }
     res.render('profilePage', { user, userProfile });
 }
@@ -22,6 +24,31 @@ const profileRouter = async (req, res) => {
 const editProfileRout = (req, res) => {
     let user = req.isAuthenticated() ? req.user : null;
     res.render('editProfile', { user });
+}
+
+const roomRout = (req, res) => {
+    const roomId = crypto.randomBytes(4).toString('hex');
+    const userId = req.session.passport.user;
+    res.redirect(`/room/${roomId}/${userId}`);
+}
+
+const room_roomidRout = (req, res) => {
+
+    const userId = req.session.passport.user;
+
+    res.redirect(`/room/${req.params.roomId}/${userId}`);
+}
+
+const room_roomid_useridRout = (req, res) => {
+
+    res.render('roomPage');
+}
+
+const waitingRoomsRout = async (req, res) => {
+
+    const user = req.isAuthenticated() ? req.user : null;
+    const rooms = await roomModel.find({}).lean();
+    res.render('waitingRoomsPage', { user, rooms });
 }
 
 const uploadPostRout = async (req, res) => {
@@ -101,4 +128,4 @@ const logoutRout = (req, res) => {
     });
 }
 
-module.exports = { homeRout, profileRouter, editProfileRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }
+module.exports = { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }

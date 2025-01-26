@@ -30,6 +30,19 @@ h1 {
     color: #333;
 }
 
+.players-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    & img{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+    }
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -150,7 +163,7 @@ h1 {
     width: 15px;
     height: 15px;
     margin: 0 5px;
-    background-color: #4CAF50;
+    background-color: #007BFF;
     border-radius: 50%;
     animation: loaderAnimation 1.2s infinite ease-in-out;
 }
