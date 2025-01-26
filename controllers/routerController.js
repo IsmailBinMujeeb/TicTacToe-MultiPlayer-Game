@@ -51,6 +51,13 @@ const waitingRoomsRout = async (req, res) => {
     res.render('waitingRoomsPage', { user, rooms });
 }
 
+const leaderboardRout = async (req, res)=>{
+    
+    const users = await userModel.find({}).sort({coins: -1}).limit(10);
+    const user = req.isAuthenticated() ? req.user : null;
+    res.render('leaderboardPage', { users, user });
+}
+
 const uploadPostRout = async (req, res) => {
     try {
 
@@ -128,4 +135,4 @@ const logoutRout = (req, res) => {
     });
 }
 
-module.exports = { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }
+module.exports = { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }

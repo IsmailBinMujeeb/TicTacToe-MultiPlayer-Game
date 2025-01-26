@@ -1,0 +1,81 @@
+main{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.leaderboard {
+  width: 100%;
+  max-width: 800px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.leaderboard-header {
+  background-color: #007BFF;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  text-align: left;
+  padding: 1rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboard-table th {
+  background-color: #f4f4f9;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.leaderboard-table td {
+  color: #555;
+
+  & a {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
+.leaderboard-table tbody tr:hover {
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.leaderboard-table tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.leaderboard-table tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .leaderboard-header {
+    font-size: 1.2rem;
+  }
+
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
