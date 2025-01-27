@@ -8,7 +8,7 @@
     </div>
     <div class="profile-details">
       <h1><%= userProfile.name %></h1>
-      <p>@<%= userProfile.username %></p>
+      <p>@<%= userProfile.username %> • <img src="/images/coin.gif" alt="coin gif" width="16px" height="16px"> <%= userProfile.coins %></p>
       <% if (userProfile.username == user.username) { %>
       <a href="/edit-profile" class="btn">Customize Profile</a>
       <% } %>

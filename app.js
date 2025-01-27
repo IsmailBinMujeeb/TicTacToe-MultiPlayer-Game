@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
 
 
         if (playerWon == currentPlayer) await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } });
-        else await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -2 } });
+        else await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } });
         io.to(roomId).emit('game-over', { playerWon });
     })
 
@@ -79,12 +79,14 @@ io.on("connection", (socket) => {
         io.to(roomId).emit('game-draw');
     })
 
-    socket.on("destroy-room", (roomId) => {
+    socket.on("destroy-room", async (roomId) => {
         const room = io.sockets.adapter.rooms.get(roomId);
 
         if (room) {
             
-            io.to(roomId).emit("room-destroyed", { roomId });
+            io.emit('room-full', {roomId});
+
+            await roomModel.findOneAndDelete({ roomId });
 
             room.forEach((socketId) => {
                 const memberSocket = io.sockets.sockets.get(socketId);
@@ -92,10 +94,12 @@ io.on("connection", (socket) => {
                     memberSocket.leave(roomId);
                 }
             });
+
+            
         }
     });
 
-    socket.on('disconnecting', (reason) => {
+    socket.on('disconnecting', () => {
 
         const rooms = [...socket.rooms].filter(room => room !== socket.id);
 

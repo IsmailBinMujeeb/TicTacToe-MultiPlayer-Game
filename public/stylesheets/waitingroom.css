@@ -1,3 +1,12 @@
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
 .card-list {
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +64,17 @@
 .card.removed {
     animation: fadeOut 0.5s ease-in-out;
     animation-fill-mode: forwards;
+}
+
+.play-btn{
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 500;
+    font-size: 1.5em;
+    margin: 10px 0px;
+    text-decoration: none;
 }
 
 @keyframes fadeIn {

@@ -120,6 +120,17 @@ h1 {
     max-width: 400px;
 }
 
+#winning-para{
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+
+    & img{
+        width: 1em;
+        height: 1em;
+    }
+}
+
 .custom-alert h1 {
     font-size: 2rem;
     color: #333;

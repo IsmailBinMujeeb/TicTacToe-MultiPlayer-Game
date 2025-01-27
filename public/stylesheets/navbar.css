@@ -81,19 +81,6 @@
     color: #007BFF;
 }
 
-#start-play-btn{
-    background-color: #007BFF;
-    color: #ffffff;
-    padding: 10px 15px;
-    border-radius: 100%;
-    text-align: center;
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 20px;
-    text-decoration: none;
-}
-
 @media (max-width: 768px) {
     .navbar-links {
         display: none;

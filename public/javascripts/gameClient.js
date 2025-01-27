@@ -2,9 +2,12 @@ function showAlert(message, redirectUrl) {
     const alertOverlay = document.getElementById("custom-alert");
     const coinGif = document.getElementById('coin-gif');
     const alertMessage = document.getElementById("alert-message");
+    const winningPara = document.getElementById('winning-para');
     const okButton = document.getElementById("ok-button");
 
-    if (message != 'You Won!') coinGif.src = '';
+    if (message != 'You Won!') {
+        winningPara.innerHTML = ''
+    }
     alertMessage.textContent = message;
     alertOverlay.classList.add("active");
 
@@ -13,17 +16,24 @@ function showAlert(message, redirectUrl) {
     });
 }
 
+
+
 const socket = io({ transports: ['websocket'] });
 const data = window.location.pathname.split('/');
 const userId = data.pop();
 const roomId = data.pop();
+
+function cancelWaiting() {
+    window.location.href = '/';
+    socket.emit('destroy-room', roomId);
+}
 
 let currentPlayer = "";
 let currentTurn = "";
 let board = ["", "", "", "", "", "", "", "", ""];
 let isGameActive = true;
 
-if(roomId != 'waitingrooms') socket.emit('join-room', {roomId, userId});
+if (roomId != 'waitingrooms') socket.emit('join-room', { roomId, userId });
 
 socket.on('load-waiting-window', (user) => {
     document.getElementById('game-container').style.display = 'none';
@@ -49,7 +59,7 @@ socket.on('player-joined', ({ roomid, player }) => {
     currentTurn = 'X'
 })
 
-socket.on('sync-profile-pic', ({ xPlayer, oPlayer })=>{
+socket.on('sync-profile-pic', ({ xPlayer, oPlayer }) => {
     document.getElementById('player-x').src = xPlayer;
     document.getElementById('player-o').src = oPlayer;
     console.log(xPlayer, oPlayer)
@@ -150,8 +160,8 @@ socket.on('start-game', ({ roomId }) => {
         socket.emit('destroy-room', roomId);
     })
 
-    socket.on('player-disconnected', ({ socketId })=>{
-        if(socketId != socket.id){
+    socket.on('player-disconnected', ({ socketId }) => {
+        if (socketId != socket.id) {
             showAlert('You Won', '/');
             isGameActive = false;
             socket.emit('destroy-room', roomId);
