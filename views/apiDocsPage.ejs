@@ -1,0 +1,46 @@
+<%- include('layouts/header', { stylesheets: ['navbar', 'style', 'apiDocs'] }) %>
+<%- include('layouts/navbar', { user }) %>
+<div class="api-docs">
+  <h1>API Documentation</h1>
+
+  <h2>1. Get User by Username</h2>
+  <div class="endpoint">
+    <strong>Endpoint:</strong>
+    <code>GET /api/users/:username</code>
+  </div>
+  <div class="description">
+    Retrieves a user's details by their username.
+    <strong>Status Codes:</strong>
+    <ul>
+      <li><strong>200:</strong> Success, returns user data.</li>
+      <li><strong>404:</strong> User not found.</li>
+    </ul>
+  </div>
+  <h2>2. Get Leaderboard</h2>
+  <div class="endpoint">
+    <strong>Endpoint:</strong>
+    <code>GET /api/leaderboard</code>
+  </div>
+  <div class="description">
+    Fetches the top 10 users sorted by the number of coins.
+    <strong>Status Codes:</strong>
+    <ul>
+      <li><strong>200:</strong> Success, returns leaderboard data.</li>
+      <li><strong>404:</strong> No users found.</li>
+    </ul>
+  </div>
+  <h2>3. Get Waiting Rooms</h2>
+  <div class="endpoint">
+    <strong>Endpoint:</strong>
+    <code>GET /api/rooms</code>
+  </div>
+  <div class="description">
+    Lists all available waiting rooms.
+    <strong>Status Codes:</strong>
+    <ul>
+      <li><strong>200:</strong> Success, returns waiting room data.</li>
+      <li><strong>404:</strong> No rooms found.</li>
+    </ul>
+  </div>
+</div>
+<%- include('layouts/footer') %>

@@ -1,0 +1,71 @@
+ul {
+    list-style: none;
+}
+
+.api-docs {
+    width: 100%;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.api-docs h1 {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.api-docs h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.endpoint {
+    background: #f1f1f1;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.endpoint code {
+    display: block;
+    background: #e8e8e8;
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+.description {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    background: #fdfdfd;
+    border-left: 4px solid #007BFF;
+    border-radius: 4px;
+}
+
+.description strong {
+    color: #007BFF;
+}
+
+.example {
+    background: #e7f7e7;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .api-docs {
+        padding: 1.5rem;
+    }
+
+    .api-docs h1 {
+        font-size: 1.8rem;
+    }
+
+    .api-docs h2 {
+        font-size: 1.3rem;
+    }
+}

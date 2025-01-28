@@ -135,4 +135,9 @@ const logoutRout = (req, res) => {
     });
 }
 
-module.exports = { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout }
+const apiDocsRout = (req, res) =>{
+    const user = req.isAuthenticated() ? req.user : null;;
+    res.render('apiDocsPage', { user });
+}
+
+module.exports = { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout, apiDocsRout }

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const { isAuthenticated } = require('../utils/isAuthenticated');
-const { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout } = require('../controllers/routerController');
+const { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout, apiDocsRout } = require('../controllers/routerController');
 const upload = require('../middlewares/multerMiddleware');
 
 router.get('/', homeRout);
@@ -36,5 +36,7 @@ router.post("/signup", registerPostRout);
 router.get('/logout', logoutRout);
 
 router.post('/upload', upload.single('file'), uploadPostRout);
+
+router.get('/api/docs', apiDocsRout);
 
 module.exports = router;
