@@ -1,4 +1,4 @@
-<%- include('layouts/header', { stylesheets: ['navbar', 'editProfile', 'style']}) %>
+<%- include('layouts/header', { stylesheets: ['navbar', 'editProfile', 'style', 'footer']}) %>
 <script src="/javascripts/editProfileChange.js" defer></script>
 <script src="/javascripts/hamburger.js" defer></script>
 <%- include('layouts/navbar', { user }) %>
@@ -20,6 +20,4 @@
   </div>
 </main>
 
-</body>
-
-</html>
+<%- include('layouts/footer', {scripts: ['hamburger', 'editProfileChange']}) %>

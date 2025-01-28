@@ -1,4 +1,4 @@
-<%- include('layouts/header', { stylesheets: ['navbar', 'style', 'apiDocs'] }) %>
+<%- include('layouts/header', { stylesheets: ['navbar', 'style', 'apiDocs', 'footer'] }) %>
 <%- include('layouts/navbar', { user }) %>
 <div class="api-docs">
   <h1>API Documentation</h1>
@@ -43,4 +43,4 @@
     </ul>
   </div>
 </div>
-<%- include('layouts/footer') %>
+<%- include('layouts/footer', { scripts: ['hamburger'] }) %>

@@ -1,6 +1,6 @@
-<%- include('layouts/header', { stylesheets: ['navbar', 'profilePage'] }) %>
-<script src="/javascripts/hamburger.js" defer></script>
+<%- include('layouts/header', { stylesheets: ['navbar', 'profilePage', 'footer'] }) %>
 <%- include('layouts/navbar', {user}) %>
+
 <main>
   <div class="profile-container">
     <div class="profile-picture">
@@ -12,11 +12,8 @@
       <% if (userProfile.username == user.username) { %>
       <a href="/edit-profile" class="btn">Customize Profile</a>
       <% } %>
-
     </div>
   </div>
 </main>
 
-</body>
-
-</html>
+<%- include('layouts/footer', { scripts: ['hamburger'] }) %>

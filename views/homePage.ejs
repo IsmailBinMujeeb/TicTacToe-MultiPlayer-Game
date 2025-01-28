@@ -1,4 +1,4 @@
-<%- include('layouts/header', {stylesheets: ['style', 'navbar']}) %>
+<%- include('layouts/header', {stylesheets: ['style', 'navbar', 'footer']}) %>
 <%- include('layouts/navbar', { user }) %>
 
-<%- include('layouts/footer') %>
+<%- include('layouts/footer', { scripts: ['hamburger'] }) %>

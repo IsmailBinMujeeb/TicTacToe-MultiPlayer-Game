@@ -1,4 +1,4 @@
-<%- include('layouts/header', {stylesheets: ['style', 'navbar', 'leaderBoard']}) %>
+<%- include('layouts/header', {stylesheets: ['style', 'navbar', 'leaderBoard', 'footer']}) %>
 <%- include('layouts/navbar', { user }) %>
 
 <main>
@@ -25,6 +25,4 @@
   </div>
 </main>
 <script src="/javascripts/hamburger.js"></script>
-</body>
-
-</html>
+<%- include('layouts/footer', {scripts:['hamburger']}) %>

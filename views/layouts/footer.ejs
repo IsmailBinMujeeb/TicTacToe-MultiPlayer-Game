@@ -1,13 +1,38 @@
-<script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
-<script src="/javascripts/hamburger.js"></script>
-<script>
-  const socket = io();
-  socket.on("hello", (arg) => {
-    console.log(arg); // world
-  });
-
-  socket.emit('kaka');
-</script>
+<footer>
+    <div class="footer-links">
+        <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/room">Play</a></li>
+                <li><a href="/waitingrooms">Rooms</a></li>
+                <li><a href="/leaderboard">Leaderboard</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>APIs</h4>
+            <ul>
+                <li><a href="/api/docs">Documentation</a></li>
+                <li><a href="/api/users/:username">Get User</a></li>
+                <li><a href="/api/waiting-rooms">Get Waiting Rooms</a></li>
+                <li><a href="/api/leaderboard">Get Leaderboard</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Follow Us</h4>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/ismailbinmujeeb/">LinkedIn</a></li>
+                <li><a href="https://github.com/IsmailBinMujeeb">Github</a></li>
+                <li><a href="https://x.com/ismailBinMujeeb">X (Twitter)</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 All rights reserved.
+    </div>
+</footer>
+<% scripts.forEach(script => { %>
+    <script src="/javascripts/<%= script %>.js"></script>
+<% }) %>
 </body>
-
 </html>

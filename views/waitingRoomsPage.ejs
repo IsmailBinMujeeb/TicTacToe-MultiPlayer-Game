@@ -1,4 +1,4 @@
-<%- include('layouts/header', { stylesheets: ['style', 'navbar', 'waitingroom'] }) %>
+<%- include('layouts/header', { stylesheets: ['style', 'navbar', 'waitingroom', 'footer'] }) %>
 <%- include('layouts/navbar', { user }) %>
 <main>
   <div class="card-list" id="cardList">
@@ -15,6 +15,4 @@
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
 <script src="/javascripts/waitingRoom.js"></script>
 <script src="/javascripts/hamburger.js"></script>
-</body>
-
-</html>
+<%- include('layouts/footer', { scripts: ['waitingRoom', 'hamburger'] }) %>
