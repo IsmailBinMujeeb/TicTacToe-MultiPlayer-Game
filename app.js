@@ -13,6 +13,7 @@ require('dotenv').config();
 const userModel = require('./models/user-model');
 const roomModel = require('./models/room-model');
 const routes = require('./routes/routes');
+const apis = require('./routes/apiRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,36 +26,36 @@ const io = socketio(server, {
 });
 
 io.on("connection", (socket) => {
-    socket.on('join-room', async ({roomId, userId}) => {
+    socket.on('join-room', async ({ roomId, userId }) => {
         const room = io.sockets.adapter.rooms.get(roomId) || new Set();
 
         if (room.size == 0) {
             socket.join(roomId);
             socket.emit('player-joined', { roomId, player: 'X' });
 
-            const user = await userModel.findOne({_id: userId});
+            const user = await userModel.findOne({ _id: userId });
 
             io.to(roomId).emit('load-waiting-window', user);
-            io.emit('room-created', {roomId, user});
+            io.emit('room-created', { roomId, user });
 
-            const newRoom = await roomModel.create({roomId: roomId, username: user.username, userid: user._id, userPic: user.profilePic.replace('./public', '')});
+            const newRoom = await roomModel.create({ roomId: roomId, username: user.username, userid: user._id, userPic: user.profilePic.replace('./public', '') });
         } else if (room.size == 1) {
             socket.join(roomId);
             socket.emit('player-joined', { roomId, player: 'O' });
             io.to(roomId).emit('start-game', { roomId });
 
-            const user = await userModel.findOne({_id: userId});
+            const user = await userModel.findOne({ _id: userId });
 
             io.to(roomId).emit('load-game-board', user);
-            io.emit('room-full', {roomId});
+            io.emit('room-full', { roomId });
 
             await roomModel.findOneAndDelete({ roomId });
         }
 
     })
 
-    socket.on('req-sync-profile-pic', ({roomId, xPlayer, oPlayer})=>{
-        
+    socket.on('req-sync-profile-pic', ({ roomId, xPlayer, oPlayer }) => {
+
         io.to(roomId).emit('sync-profile-pic', { xPlayer, oPlayer });
     })
 
@@ -83,8 +84,8 @@ io.on("connection", (socket) => {
         const room = io.sockets.adapter.rooms.get(roomId);
 
         if (room) {
-            
-            io.emit('room-full', {roomId});
+
+            io.emit('room-full', { roomId });
 
             await roomModel.findOneAndDelete({ roomId });
 
@@ -95,7 +96,7 @@ io.on("connection", (socket) => {
                 }
             });
 
-            
+
         }
     });
 
@@ -166,5 +167,6 @@ passport.deserializeUser(async (id, done) => {
 })
 
 app.use('/', routes);
+app.use('/', apis);
 
 server.listen(PORT, () => { console.log(`Running at http://localhost:3000`) });
