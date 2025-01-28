@@ -1,3 +1,5 @@
+@import './variabels.css';
+
 ul {
     list-style: none;
 }
@@ -11,7 +13,7 @@ ul {
 
 .api-docs h1 {
     font-size: 2rem;
-    color: #007BFF;
+    color: var(--text-ternary);
     margin-bottom: 1rem;
 }
 
@@ -41,12 +43,12 @@ ul {
     margin: 0.5rem 0;
     padding: 1rem;
     background: #fdfdfd;
-    border-left: 4px solid #007BFF;
+    border-left: 4px solid var(--text-ternary);
     border-radius: 4px;
 }
 
 .description strong {
-    color: #007BFF;
+    color: var(--text-ternary);
 }
 
 .example {

@@ -1,0 +1,105 @@
+@import './variabels.css';
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+body {
+    font-family: 'Varela Round', sans-serif;
+    background-color: var(--bg-primary); /* Lightest background color */
+    color: var(--accent-dark); /* Text color for contrast */
+}
+
+.hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(to right, var(--bg-secondary), var(--bg-primary));
+}
+
+.hero-content {
+    max-width: 600px;
+    text-align: left;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    color: var(--text-ternary); /* Subtle headline color */
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--accent-dark); /* Paragraph text */
+}
+
+.hero-content .btn {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--text-secondary); /* Button background */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-content .btn:hover {
+    background: var(--accent-dark); /* Slightly darker on hover */
+    transform: translateY(-3px);
+}
+
+.hero-image {
+    margin-left: 2rem;
+    animation: slideIn 1.5s ease-in-out;
+}
+
+.hero-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 90%;
+        margin-bottom: 2rem;
+    }
+
+    .hero-image {
+        margin: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

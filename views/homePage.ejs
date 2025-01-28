@@ -1,4 +1,15 @@
-<%- include('layouts/header', {stylesheets: ['style', 'navbar', 'footer']}) %>
+<%- include('layouts/header', {stylesheets: ['style', 'navbar', 'homePage', 'footer']}) %>
 <%- include('layouts/navbar', { user }) %>
-
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Classic Game</h1>
+      <p>Experience seamless integration, powerful community, and world-class multi-player game. Get started today and touch the peak of leaderBoard.</p>
+      <a href="/room" class="btn">Let's Play</a>
+    </div>
+    <div class="hero-image">
+      <img src="/images/logo.png" alt="Hero Illustration">
+    </div>
+  </section>
+</main>
 <%- include('layouts/footer', { scripts: ['hamburger'] }) %>

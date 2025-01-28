@@ -1,9 +1,11 @@
+@import './variabels.css';
+
 footer {
     background-color: #1c1c1e;
     color: #ffffff;
     text-align: center;
     padding: 2rem 1rem;
-    border-top: 4px solid #007BFF;
+    border-top: 4px solid var(--text-ternary);
 }
 
 .footer-links {
@@ -21,7 +23,7 @@ footer {
 .footer-section h4 {
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    color: #007BFF;
+    color: var(--accent-dark);
 }
 
 .footer-section ul {
@@ -39,7 +41,7 @@ footer {
 }
 
 .footer-section ul li a:hover {
-    color: #007BFF;
+    color: var(--text-secondary);
 }
 
 .social-icons {

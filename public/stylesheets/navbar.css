@@ -1,3 +1,5 @@
+@import './variabels.css';
+
 .navbar {
     display: flex;
     justify-content: right;
@@ -34,7 +36,7 @@
 }
 
 .navbar-links a:hover {
-    color: #007BFF;
+    color: var(--text-ternary);
 }
 
 .navbar-profile {
@@ -78,7 +80,7 @@
 }
 
 .mobile-menu a:hover {
-    color: #007BFF;
+    color: var(--accent-dark);
 }
 
 @media (max-width: 768px) {

@@ -1,3 +1,6 @@
+@import './variabels.css';
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +8,8 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Varela Round', sans-serif;
+    background-color: var(--bg-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +56,7 @@ h1 {
 .cell {
     width: 100px;
     height: 100px;
-    background-color: #e5e7eb;
+    background-color: var(--bg-secondary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,28 +68,13 @@ h1 {
 }
 
 .cell:hover {
-    background-color: #d1d5db;
+    background-color: var(--text-ternary);
 }
 
 #status {
     font-size: 1rem;
     margin: 1rem 0;
     color: #374151;
-}
-
-#reset-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#reset-button:hover {
-    background-color: #0056b3;
 }
 
 .custom-alert-overlay {
@@ -139,7 +127,7 @@ h1 {
 
 .custom-alert button {
     padding: 0.8rem 1.2rem;
-    background-color: #007BFF;
+    background-color: var(--accent-dark);
     color: white;
     border: none;
     border-radius: 8px;
@@ -149,7 +137,7 @@ h1 {
 }
 
 .custom-alert button:hover {
-    background-color: #0056b3;
+    background-color: var(--text-ternary);
 }
 
 #waiting-container {
@@ -174,7 +162,7 @@ h1 {
     width: 15px;
     height: 15px;
     margin: 0 5px;
-    background-color: #007BFF;
+    background-color: var(--text-ternary);
     border-radius: 50%;
     animation: loaderAnimation 1.2s infinite ease-in-out;
 }
@@ -251,4 +239,3 @@ h1 {
         padding: 0.7rem 1.2rem;
     }
 }
-

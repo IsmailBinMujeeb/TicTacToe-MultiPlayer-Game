@@ -1,3 +1,5 @@
+@import './variabels.css';
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +8,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: var(--bg-primary);
 }
 
 main{
@@ -19,7 +21,7 @@ main{
 
 .btn {
     padding: 0.8rem;
-    background-color: #007BFF;
+    background-color: var(--accent-dark);
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -32,11 +34,11 @@ main{
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--text-ternary);
 }
 
 .profile-container {
-    background-color: #ffffff;
+    background-color: #f9f9f9;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

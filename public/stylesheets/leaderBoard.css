@@ -1,3 +1,5 @@
+@import './variabels.css';
+
 main {
   display: flex;
   justify-content: center;
@@ -16,7 +18,7 @@ main {
 }
 
 .leaderboard-header {
-  background-color: #007BFF;
+  background-color: var(--accent-dark);
   color: white;
   text-align: center;
   padding: 1rem;
@@ -40,7 +42,7 @@ main {
 }
 
 .leaderboard-table th {
-  background-color: #f4f4f9;
+  background-color: var(--bg-secondary);
   color: #333;
   font-weight: bold;
   text-transform: uppercase;
@@ -61,11 +63,11 @@ main {
 }
 
 .leaderboard-table tbody tr:nth-child(odd) {
-  background-color: #fafafa;
+  background-color: var(--bg-primary);
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
-  background-color: #fff;
+  background-color: var(--bg-secondary);
 }
 
 @media (max-width: 768px) {

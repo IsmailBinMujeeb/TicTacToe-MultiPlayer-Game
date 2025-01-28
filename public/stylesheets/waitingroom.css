@@ -1,9 +1,15 @@
+@import './variabels.css';
+
+body{
+    background-color: var(--bg-primary);
+}
+
 main{
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    min-height: 100vh;
+    min-height: fit-content;
     padding: 1rem;
 }
 
@@ -34,7 +40,7 @@ main{
     margin: 0 auto;
     object-fit: cover;
     display: block;
-    border: 3px solid #007BFF;
+    border: 3px solid var(--text-ternary);
 }
 
 .card h3, .username {
@@ -46,7 +52,7 @@ main{
 .card a, .room-link {
     margin-top: 1.5rem;
     padding: 0.8rem 1.5rem;
-    background-color: #007BFF;
+    background-color: var(--accent-dark);
     color: white;
     font-size: 1rem;
     border-radius: 8px;
@@ -57,7 +63,7 @@ main{
 }
 
 .card a:hover {
-    background-color: #0056b3;
+    background-color: var(--text-ternary);
     transform: scale(1.05);
 }
 
@@ -67,14 +73,21 @@ main{
 }
 
 .play-btn{
-    background-color: #007BFF;
+    background-color: var(--accent-dark);
     color: #fff;
     padding: 10px 20px;
     border-radius: 30px;
     font-weight: 500;
     font-size: 1.5em;
-    margin: 10px 0px;
+    margin-top: 30px;
     text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+.play-btn:hover{
+    background-color: var(--text-ternary);
+    transform: scale(1.05);
 }
 
 @keyframes fadeIn {

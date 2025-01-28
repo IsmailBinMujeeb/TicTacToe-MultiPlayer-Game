@@ -1,13 +1,18 @@
+@import './variabels.css';
+
 main {
     display: flex;
     justify-content: center;
     align-items: top;
-    min-height: fit-content;
-    margin: 20px 0px;
+    /* min-height: fit-content; */
+    padding: 20px 0px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
 }
 
 .edit-profile-container {
-    background-color: #ffffff;
+    background-color: #f9f9f9;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,7 +79,7 @@ form input {
 
 form button {
     padding: 0.8rem;
-    background-color: #007BFF;
+    background-color: var(--accent-dark);
     color: white;
     border: none;
     border-radius: 8px;
@@ -84,7 +89,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #0056b3;
+    background-color: var(--text-ternary);
 }
 
 @media (max-width: 768px) {
