@@ -11,5 +11,62 @@
       <img src="/images/logo.png" alt="Hero Illustration">
     </div>
   </section>
+  <section class="single-player-game">
+    <div class="game-tip">
+      <h1>Tips</h1>
+      <p id="tip"> Control the Corners
+        If the center is taken, aim for a corner. Corners are strategic because they can be part of multiple winning combinations (horizontal, vertical, and diagonal).</p>
+    </div>
+    <div class="game-container">
+      <div id="game-board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+      <div id="status">Player X's turn</div>
+      <button id="reset-button">Restart Game</button>
+    </div>
+  </section>
+  <section class="feature-section">
+    <div class="feature-container">
+      <h2 class="section-title">Why Play Tic Tac Toe with Us?</h2>
+      <div class="features">
+        <div class="feature-card">
+          <div class="icon-wrapper">
+            <i class="icon">🌐</i>
+          </div>
+          <h3 class="feature-title">Play with Anyone, Anywhere</h3>
+          <p class="feature-desc">Challenge players from around the globe in real-time matches.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper">
+            <i class="icon">🎮</i>
+          </div>
+          <h3 class="feature-title">Seamless Gameplay</h3>
+          <p class="feature-desc">Enjoy smooth, lag-free gaming designed for all devices.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper">
+            <i class="icon">💬</i>
+          </div>
+          <h3 class="feature-title">In-game Chat</h3>
+          <p class="feature-desc">Talk to your opponents and make every game more interactive.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrapper">
+            <i class="icon">🏆</i>
+          </div>
+          <h3 class="feature-title">Leaderboards</h3>
+          <p class="feature-desc">Climb to the top and show off your Tic Tac Toe skills.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-<%- include('layouts/footer', { scripts: ['hamburger'] }) %>
+<%- include('layouts/footer', { scripts: ['hamburger', 'singlePlayerGame'] }) %>

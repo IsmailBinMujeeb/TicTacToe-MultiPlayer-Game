@@ -135,7 +135,6 @@ socket.on('start-game', ({ roomId }) => {
         board[index] = player;
         let targetCell = document.querySelector('.cell[data-index="' + index + '"]');
         targetCell.textContent = player;
-        console.log(player)
         checkResult();
         if (isGameActive) togglePlayer();
     })

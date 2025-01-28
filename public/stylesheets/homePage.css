@@ -3,8 +3,8 @@
 
 body {
     font-family: 'Varela Round', sans-serif;
-    background-color: var(--bg-primary); /* Lightest background color */
-    color: var(--accent-dark); /* Text color for contrast */
+    background-color: #f9f9f9;
+    color: var(--accent-dark);
 }
 
 .hero {
@@ -66,6 +66,158 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+.single-player-game{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #1c1c1e;
+    border-top: 4px solid var(--text-ternary);
+}
+
+.game-container {
+    text-align: center;
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    animation: slideIn ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    margin: 1rem 0;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #1f2937;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #d1d5db;
+}
+
+#status {
+    font-size: 1rem;
+    margin: 1rem 0;
+    color: #374151;
+}
+
+#reset-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: var(--accent-dark);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#reset-button:hover {
+    background-color: var(--text-ternary);
+}
+
+.game-tip {
+    max-width: 600px;
+    text-align: left;
+    animation: scaleIn ease-in-out;
+    animation-timeline: view();
+    animation-range: entry 0;
+}
+
+.game-tip h1 {
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    color: #f9f9f9;
+}
+
+.game-tip p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--accent-light);
+}
+
+.feature-section {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 4rem 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.feature-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 14px var(--card-shadow);
+    padding: 2rem;
+    text-align: center;
+    flex: 1 1 calc(25% - 2rem);
+    max-width: calc(25% - 2rem);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+.icon-wrapper {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--highlight);
+}
+
+.feature-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.feature-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
 @media (max-width: 768px) {
     .hero {
         flex-direction: column;
@@ -80,6 +232,22 @@ body {
     .hero-image {
         margin: 0;
     }
+
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+
+    .features {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        max-width: 100%;
+        flex: 1 1 100%;
+    }
 }
 
 @keyframes fadeIn {
@@ -90,6 +258,17 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
     }
 }
 
