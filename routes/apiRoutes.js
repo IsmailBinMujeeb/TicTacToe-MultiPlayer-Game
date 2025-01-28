@@ -3,6 +3,6 @@ const { usersApiRout, leaderboardApiRout, waitingRoomsApiRout } = require('../co
 
 router.get('/api/users/:username', usersApiRout);
 router.get('/api/leaderboard', leaderboardApiRout);
-router.get('/api/rooms', waitingRoomsApiRout);
+router.get('/api/waiting-rooms', waitingRoomsApiRout);
 
 module.exports = router;

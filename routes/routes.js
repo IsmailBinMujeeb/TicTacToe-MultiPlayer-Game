@@ -17,7 +17,7 @@ router.get('/room/:roomId', isAuthenticated, room_roomidRout);
 
 router.get('/room/:roomid/:userId', room_roomid_useridRout);
 
-router.get('/waitingrooms', waitingRoomsRout);
+router.get('/waiting-rooms', waitingRoomsRout);
 
 router.get('/leaderboard', leaderboardRout)
 
