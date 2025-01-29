@@ -105,8 +105,6 @@ io.on("connection", (socket) => {
                     memberSocket.leave(roomId);
                 }
             });
-
-
         }
     });
 
@@ -115,7 +113,9 @@ io.on("connection", (socket) => {
         const rooms = [...socket.rooms].filter(room => room !== socket.id);
 
         rooms.forEach((room) => {
-            io.to(room).emit('player-disconnected', { socketId: socket.id });
+            const roomData = io.sockets.adapter.rooms.get(room);
+            console.log(roomData.length)
+            io.to(room).emit('player-disconnected', { socketId: socket.id, roomsLen: roomData.length });
         })
     });
 });
