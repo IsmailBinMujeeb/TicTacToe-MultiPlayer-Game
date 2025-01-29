@@ -54,9 +54,19 @@ io.on("connection", (socket) => {
 
     })
 
-    socket.on('req-sync-profile-pic', ({ roomId, xPlayer, oPlayer }) => {
+    socket.on('req-sync-profile-pic', ({ roomId, xPlayer, oPlayer, username }) => {
 
-        io.to(roomId).emit('sync-profile-pic', { xPlayer, oPlayer });
+        io.to(roomId).emit('sync-profile-pic', { xPlayer, oPlayer, username });
+    })
+
+    socket.on('send-message', ({ roomId, messageText })=>{
+
+        socket.to(roomId).emit('got-message', messageText)
+    })
+
+    socket.on('send-sticker', ({ roomId, sticker })=>{
+
+        socket.to(roomId).emit('got-sticker', sticker)
     })
 
     socket.on('player-click', ({ index, roomId, player }) => {

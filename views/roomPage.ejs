@@ -29,6 +29,52 @@
   <button class="cancel-button" onclick="cancelWaiting()">Cancel</button>
 </div>
 
+<div id="chatWidget">
+  <button class="reopen-chat">
+    <div class="notification"></div>💬 Open Chat
+  </button>
+
+  <div class="chat-widget hidden">
+    <div class="chat-header">
+      <span>Game Chat</span>
+      <div class="chat-controls">
+        <button class="close-chat">❌</button>
+      </div>
+    </div>
+    <div class="chat-body">
+      <div class="messages">
+        <p class="message center" id="welcome-message">This is the start of your chat with @</p>
+      </div>
+    </div>
+    <div class="chat-stickers">
+      <div class="stickers">
+        <button onclick="sendSticker('dance')">
+          <img src="/images/dance.gif" alt="Dance sticker">
+        </button>
+        <button onclick="sendSticker('clap')">
+          <img src="/images/clap.gif" alt="Clap sticker">
+        </button>
+        <button onclick="sendSticker('hi')">
+          <img src="/images/hi.gif" alt="Hi sticker">
+        </button>
+        <button onclick="sendSticker('happy')">
+          <img src="/images/happy.gif" alt="Happy sticker">
+        </button>
+        <button onclick="sendSticker('lol')">
+          <img src="/images/lol.gif" alt="Lol sticker">
+        </button>
+        <button onclick="sendSticker('dab')">
+          <img src="/images/dab.gif" alt="Dab sticker">
+        </button>
+      </div>
+    </div>
+    <div class="chat-footer">
+      <input type="text" placeholder="Type your message..." />
+      <button class="send-message">Send</button>
+    </div>
+  </div>
+</div>
+
 <div class="custom-alert-overlay" id="custom-alert">
   <div class="custom-alert">
     <p id="winning-para"><img src="/images/coin.gif" alt="coin gif" id="coin-gif"> +2</p>
@@ -39,4 +85,5 @@
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>
 <script src="/javascripts/gameClient.js"></script>
 </body>
+
 </html>
