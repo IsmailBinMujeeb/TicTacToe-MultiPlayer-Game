@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 const { createServer } = require('http');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const path = require('path');
@@ -59,12 +60,12 @@ io.on("connection", (socket) => {
         io.to(roomId).emit('sync-profile-pic', { xPlayer, oPlayer, username });
     })
 
-    socket.on('send-message', ({ roomId, messageText })=>{
+    socket.on('send-message', ({ roomId, messageText }) => {
 
         socket.to(roomId).emit('got-message', messageText)
     })
 
-    socket.on('send-sticker', ({ roomId, sticker })=>{
+    socket.on('send-sticker', ({ roomId, sticker }) => {
 
         socket.to(roomId).emit('got-sticker', sticker)
     })
@@ -164,8 +165,32 @@ passport.use(new LocalStrategy(async (username, password, done) => {
     }
 }));
 
-passport.serializeUser((user, done) => {
+passport.use(new GoogleStrategy(
+    {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://localhost:3000/auth/google/callback',
+    },
 
+    async (accessToken, refreshToken, profile, done) => {
+
+        try {
+
+            const user = await userModel.findOneAndUpdate({ profileId: profile.id }, {
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                username: profile.emails[0].value.split('@')[0],
+            }, { new: true, upsert: true });
+
+            done(null, user)
+        } catch (error) {
+            done(error, false)
+        }
+    }
+))
+
+passport.serializeUser((user, done) => {
+    
     done(null, user.id)
 })
 

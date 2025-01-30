@@ -29,6 +29,17 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }));
 
+router.get('/auth/google', passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/" }),
+    (req, res) => {
+        // console.log(req)
+        res.redirect("/room");
+    }
+);
+
 router.get('/signup', regiterRout);
 
 router.post("/signup", registerPostRout);
