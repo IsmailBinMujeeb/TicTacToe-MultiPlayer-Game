@@ -1,5 +1,7 @@
 const express = require('express');
 const session = require('express-session');
+require('dotenv').config();
+
 const conn = require('./config/db');
 const socketio = require('socket.io');
 const { createServer } = require('http');
@@ -9,7 +11,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const path = require('path');
-require('dotenv').config();
+
 
 const userModel = require('./models/user-model');
 const roomModel = require('./models/room-model');
