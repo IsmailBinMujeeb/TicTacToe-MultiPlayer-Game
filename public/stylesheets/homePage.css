@@ -99,8 +99,8 @@ body {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    aspect-ratio: 1/1;
     background-color: #e5e7eb;
     display: flex;
     justify-content: center;
@@ -234,8 +234,6 @@ body {
     }
 
     .cell {
-        width: 80px;
-        height: 80px;
         font-size: 1.5rem;
     }
 

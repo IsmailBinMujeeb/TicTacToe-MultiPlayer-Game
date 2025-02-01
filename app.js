@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
+const axios = require('axios')
 const path = require('path');
 
 
@@ -205,5 +206,13 @@ passport.deserializeUser(async (id, done) => {
 
 app.use('/', routes);
 app.use('/', apis);
+
+setInterval(async ()=>{
+    try {
+        const response = await axios.get('https://tictactoe-q4q1.onrender.com/');
+    } catch (error) {
+        console.error('Error fetching data:', error.message);
+    }
+}, 300000);
 
 server.listen(PORT, () => { console.log(`Running at http://localhost:3000`) });

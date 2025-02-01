@@ -1,4 +1,4 @@
-<%- include('layouts/header', { stylesheets: ['navbar', 'editProfile', 'style', 'footer']}) %>
+<%- include('layouts/header', { stylesheets: ['navbar', 'editProfile', 'style', 'footer'], title: 'Edit Profile'}) %>
 <%- include('layouts/navbar', { user }) %>
 <main>
   <div class="edit-profile-container">
@@ -6,11 +6,11 @@
       <h1>Edit Profile</h1>
     </div>
     <form method="post" action="upload" enctype="multipart/form-data">
-        <div class="profile-picture">
-            <img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Picture">
-            <label for="profile-pic-input">Change Profile Picture</label>
-            <input type="file" id="profile-pic-input" name="file">
-          </div>
+      <div class="profile-picture">
+        <img src="<%= user.profilePic.replace('/public', '') %>" alt="Profile Picture">
+        <label for="profile-pic-input">Change Profile Picture</label>
+        <input type="file" id="profile-pic-input" name="file">
+      </div>
       <label for="name">Name</label>
       <input type="text" id="name" placeholder="Enter your name" name="name" value="<%= user.name %>">
       <button type="submit">Save Changes</button>

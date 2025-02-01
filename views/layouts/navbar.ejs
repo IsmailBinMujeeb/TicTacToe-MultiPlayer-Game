@@ -10,7 +10,7 @@
   </div>
   <div class="navbar-profile">
     <% if (user) { %>
-      <a href="/profile?user=<%= user.username %>"><img src="http://localhost:3000<%= user.profilePic.replace('./public', '') %>" alt="Profile Picture"></a>
+      <a href="/profile?user=<%= user.username %>"><img src="https://tictactoe-q4q1.onrender.com/<%= user.profilePic.replace('./public', '') %>" alt="Profile Picture"></a>
     <% } else { %>
     <div class="navbar-links">
       <a href="/login">Login</a>

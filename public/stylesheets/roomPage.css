@@ -55,8 +55,8 @@ h1 {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    aspect-ratio: 1/1;
     background-color: var(--bg-secondary);
     display: flex;
     justify-content: center;
@@ -390,12 +390,18 @@ h1 {
     background-color: #c0392b;
 }
 
+@media (max-width: 275px){
+
+    h1{
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     .cell {
-        width: 80px;
-        height: 80px;
         font-size: 1.5rem;
     }
+
 
     .custom-alert h1 {
         font-size: 1.5rem;
