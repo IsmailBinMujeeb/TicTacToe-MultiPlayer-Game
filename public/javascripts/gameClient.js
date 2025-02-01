@@ -255,20 +255,23 @@ chatHeader.addEventListener('touchstart', (e) => {
   offsetX = touch.clientX - chatWidget.offsetLeft;
   offsetY = touch.clientY - chatWidget.offsetTop;
   chatWidget.style.transition = 'none';
-});
+
+}, { passive: true });
 
 document.addEventListener('touchmove', (e) => {
   if (isDragging) {
+    e.preventDefault();
+
     const touch = e.touches[0];
     chatWidget.style.left = `${touch.clientX - offsetX}px`;
     chatWidget.style.top = `${touch.clientY - offsetY}px`;
   }
-});
+}, { passive: true });
 
 document.addEventListener('touchend', () => {
   isDragging = false;
   chatWidget.style.transition = 'all 0.3s ease';
-});
+}, { passive: true });
 
 // Close functionality
 closeButton.addEventListener('click', () => {
