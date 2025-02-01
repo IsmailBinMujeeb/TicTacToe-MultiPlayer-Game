@@ -24,10 +24,6 @@ const userId = data.pop();
 const roomId = data.pop();
 let username = '';
 
-window.addEventListener("beforeunload", () => {
-  socket.emit('destroy-room', roomId);
-});
-
 function cancelWaiting() {
   window.location.href = '/';
   socket.emit('destroy-room', roomId);
@@ -41,18 +37,21 @@ let isGameActive = true;
 if (roomId != 'waitingrooms') socket.emit('join-room', { roomId, userId });
 
 socket.on('load-waiting-window', (user) => {
-  document.getElementById('game-container').style.display = 'none';
-  document.getElementById('chatWidget').style.display = 'none';
+  // document.getElementById('game-container').style.display = 'none';
+  // document.getElementById('chatWidget').style.display = 'none';
   document.getElementById('waiting-container').style.display = 'block';
   username = user.username;
   document.getElementById('player-x').src = user.profilePic.replace('./public', '');
 })
 
 socket.on('load-game-board', (user) => {
+  document.getElementById('waiting-container').classList.remove('active');
+  document.getElementById('chatWidget').classList.add('active');
   document.getElementById('waiting-container').style.display = 'none';
+  document.getElementById('game-container').style.display = 'block';
   document.getElementById('chatWidget').style.display = 'block';
   if (currentPlayer == 'X') document.getElementById('welcome-message').innerText += user.username + '! 🎮';
-  document.getElementById('game-container').style.display = 'block';
+  document.getElementById('game-container').classList.add('active');
   document.getElementById('player-o').src = user.profilePic.replace('./public', '');
 
   if (currentPlayer == 'X') socket.emit('req-sync-profile-pic', { roomId, xPlayer: document.getElementById('player-x').src, oPlayer: user.profilePic.replace('./public', ''), username })
@@ -120,7 +119,7 @@ socket.on('start-game', ({ roomId }) => {
     }
 
     if (roundWon) {
-      socket.emit('player-won', { playerWon: currentTurn, currentPlayer, roomId, userId })
+      socket.emit('player-won', { playerWon: currentTurn, currentPlayer, roomId, userId });
       return;
     }
 
@@ -171,11 +170,22 @@ socket.on('start-game', ({ roomId }) => {
   socket.on('player-disconnected', ({ socketId }) => {
 
     if (socketId != socket.id) {
-      showAlert('You Won', '/');
+      showAlert('You Won!', '/');
       isGameActive = false;
       socket.emit('destroy-room', roomId);
+      socket.emit('increase-pts', { roomId, userId });
     }
   });
+});
+
+window.addEventListener("beforeunload", () => {
+
+  if (isGameActive) {
+    socket.emit('page-refreshed');
+    socket.emit('dicrease-pts', { roomId, userId });
+    window.location.href = 'http://localhost:3000';
+  }
+
 });
 
 // Message Client

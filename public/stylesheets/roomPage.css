@@ -26,6 +26,14 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 90%;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+#game-container.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 h1 {
@@ -144,7 +152,14 @@ h1 {
 #waiting-container {
     text-align: center;
     padding: 2rem;
+    /* opacity: 0;
+    pointer-events: none; */
 }
+
+/* #waiting-container.active {
+    opacity: 1;
+    pointer-events: all;
+} */
 
 .waiting-message {
     font-size: 2rem;
@@ -178,6 +193,17 @@ h1 {
 
 .loader div:nth-child(3) {
     animation-delay: 0s;
+}
+
+#chatWidget {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+#chatWidget.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .chat-widget {
@@ -285,7 +311,7 @@ h1 {
     gap: 0.5em;
 }
 
-.stickers button:hover{
+.stickers button:hover {
     cursor: pointer;
 }
 
@@ -390,9 +416,9 @@ h1 {
     background-color: #c0392b;
 }
 
-@media (max-width: 275px){
+@media (max-width: 275px) {
 
-    h1{
+    h1 {
         display: none;
     }
 }

@@ -77,6 +77,14 @@ io.on("connection", (socket) => {
 
         io.to(roomId).emit('make-changes', { index, player });
     })
+    
+    socket.on('increase-pts', async ({roomId, userId})=>{
+        await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } });
+    });
+
+    socket.on('dicrease-pts', async ({roomId, userId})=>{
+        await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } });
+    });
 
     socket.on('next-turn', ({ nextTurn, roomId }) => {
         io.to(roomId).emit('set-turn', { nextTurn });
@@ -112,13 +120,23 @@ io.on("connection", (socket) => {
         }
     });
 
+    socket.on('page-refreshed', ()=>{
+        const rooms = [...socket.rooms].filter(room => room !== socket.id);
+
+        rooms.forEach((room) => {
+            const roomData = io.sockets.adapter.rooms.get(room);
+            
+            io.to(room).emit('player-disconnected', { socketId: socket.id, roomsLen: roomData.length });
+        })
+    })
+
     socket.on('disconnecting', () => {
 
         const rooms = [...socket.rooms].filter(room => room !== socket.id);
 
         rooms.forEach((room) => {
             const roomData = io.sockets.adapter.rooms.get(room);
-            console.log(roomData.length)
+            
             io.to(room).emit('player-disconnected', { socketId: socket.id, roomsLen: roomData.length });
         })
     });
