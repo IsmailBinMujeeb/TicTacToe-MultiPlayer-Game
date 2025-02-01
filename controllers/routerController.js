@@ -88,7 +88,12 @@ const regiterRout = (req, res) => {
 const registerPostRout = async (req, res, next) => {
 
     try {
-        const { name, email, username, password } = req.body;
+        const { name, email, username, password, confirmPassword } = req.body;
+
+        if (password != confirmPassword) {
+            req.flash("error", "password and confirmed password does not match");
+            return res.redirect("/signup");
+        }
 
         const regExpUsername = new RegExp(`^${username}$`, 'i');
 
