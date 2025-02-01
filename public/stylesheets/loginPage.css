@@ -59,6 +59,23 @@ body {
     outline: none;
 }
 
+.login-opts{
+
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.login-opts button{
+    flex: 1;
+}
+
+.login-opts a{
+
+    flex: 1;
+}
+
 .login-button {
     padding: 0.8rem;
     background-color: var(--accent-dark);

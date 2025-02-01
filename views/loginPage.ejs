@@ -4,7 +4,7 @@
   <div class="login-header">
     <h1>Welcome Back</h1>
     <% if (err) { %>
-        <p class="flash-message"><%= err %></p>
+    <p class="flash-message"><%= err %></p>
     <% } %>
   </div>
   <form class="login-form" method="post" action="/login">
@@ -14,8 +14,10 @@
     <label for="password">Password</label>
     <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-    <button type="submit" class="login-button">Login</button>
-    <a href="/auth/google/" class="login-button">Google</a>
+    <div class="login-opts">
+      <button type="submit" class="login-button">Login</button>
+      <a href="/auth/google/" class="login-button">Google</a>
+    </div>
   </form>
   <div class="login-footer">
     <p>Don't have an account? <a href="/signup">Sign up</a></p>
