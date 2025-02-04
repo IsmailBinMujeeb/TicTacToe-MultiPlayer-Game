@@ -1,3 +1,4 @@
+const redisClient = require('../config/redis-config')
 const userModel = require('../models/user-model');
 const roomModel = require('../models/room-model');
 const crypto = require('crypto')
@@ -18,6 +19,8 @@ const profileRouter = async (req, res) => {
     if (!userProfile) {
         return res.status(404).send({ message: '404 user not found.' });
     }
+    
+    await redisClient.setEx(`user:${username}`, 3600, JSON.stringify(userProfile));
     res.render('profilePage', { user, userProfile });
 }
 
@@ -64,8 +67,12 @@ const uploadPostRout = async (req, res) => {
         if (req.file) {
             const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${req.file.destination}/${req.file.filename}`, name: req.body.name }, { new: true });
             req.user = user;
+            await redisClient.del(`user:${user.username}`);
+            await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
         } else {
             const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { name: req.body.name }, { new: true });
+            await redisClient.del(`user:${user.username}`);
+            await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
             req.user = user;
         }
 

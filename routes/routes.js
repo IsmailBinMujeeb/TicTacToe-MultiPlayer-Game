@@ -3,10 +3,11 @@ const passport = require('passport');
 const { isAuthenticated } = require('../utils/isAuthenticated');
 const { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout, apiDocsRout } = require('../controllers/routerController');
 const upload = require('../middlewares/multerMiddleware');
+const cachedMiddleware = require('../middlewares/cachedMiddleware');
 
 router.get('/', homeRout);
 
-router.get('/profile', isAuthenticated, profileRouter);
+router.get('/profile', isAuthenticated, cachedMiddleware('query'), profileRouter);
 
 router.get('/edit-profile', isAuthenticated, editProfileRout);
 

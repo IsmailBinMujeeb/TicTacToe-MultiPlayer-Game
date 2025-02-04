@@ -3,6 +3,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const conn = require('./config/db');
+const redisClient = require('./config/redis-config');
 const socketio = require('socket.io');
 const { createServer } = require('http');
 const passport = require('passport');
@@ -77,13 +78,17 @@ io.on("connection", (socket) => {
 
         io.to(roomId).emit('make-changes', { index, player });
     })
-    
-    socket.on('increase-pts', async ({roomId, userId})=>{
-        await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } });
+
+    socket.on('increase-pts', async ({ roomId, userId }) => {
+        const user = await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } }, { new: true });
+        await redisClient.del(`user:${user.username}`);
+        await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
     });
 
-    socket.on('dicrease-pts', async ({roomId, userId})=>{
-        await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } });
+    socket.on('dicrease-pts', async ({ roomId, userId }) => {
+        const user = await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } }, { new: true });
+        await redisClient.del(`user:${user.username}`);
+        await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
     });
 
     socket.on('next-turn', ({ nextTurn, roomId }) => {
@@ -93,8 +98,16 @@ io.on("connection", (socket) => {
     socket.on('player-won', async ({ playerWon, currentPlayer, roomId, userId }) => {
 
 
-        if (playerWon == currentPlayer) await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } });
-        else await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } });
+        if (playerWon == currentPlayer) {
+            const user = await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: 2 } }, { new: true });
+            await redisClient.del(`user:${user.username}`);
+            await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
+        } 
+        else {
+            const user = await userModel.findOneAndUpdate({ _id: userId }, { $inc: { coins: -1 } }, { new: true });
+            await redisClient.del(`user:${user.username}`);
+            await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));
+        } 
         io.to(roomId).emit('game-over', { playerWon });
     })
 
@@ -120,12 +133,12 @@ io.on("connection", (socket) => {
         }
     });
 
-    socket.on('page-refreshed', ()=>{
+    socket.on('page-refreshed', () => {
         const rooms = [...socket.rooms].filter(room => room !== socket.id);
 
         rooms.forEach((room) => {
             const roomData = io.sockets.adapter.rooms.get(room);
-            
+
             io.to(room).emit('player-disconnected', { socketId: socket.id, roomsLen: roomData.length });
         })
     })
@@ -136,7 +149,7 @@ io.on("connection", (socket) => {
 
         rooms.forEach((room) => {
             const roomData = io.sockets.adapter.rooms.get(room);
-            
+
             io.to(room).emit('player-disconnected', { socketId: socket.id, roomsLen: roomData.length });
         })
     });
@@ -211,7 +224,7 @@ passport.use(new GoogleStrategy(
 ))
 
 passport.serializeUser((user, done) => {
-    
+
     done(null, user.id)
 })
 
@@ -225,7 +238,7 @@ passport.deserializeUser(async (id, done) => {
 app.use('/', routes);
 app.use('/', apis);
 
-setInterval(async ()=>{
+setInterval(async () => {
     try {
         const response = await axios.get('https://tictactoe-q4q1.onrender.com/');
     } catch (error) {
