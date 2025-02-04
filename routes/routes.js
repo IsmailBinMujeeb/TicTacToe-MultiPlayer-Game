@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-const { isAuthenticated } = require('../utils/isAuthenticated');
+const { isAuthenticated } = require('../middlewares/isAuthenticated');
 const { homeRout, profileRouter, editProfileRout, roomRout, room_roomidRout, room_roomid_useridRout, waitingRoomsRout, leaderboardRout, uploadPostRout, loginRout, regiterRout, registerPostRout, logoutRout, apiDocsRout } = require('../controllers/routerController');
 const upload = require('../middlewares/multerMiddleware');
 const cachedMiddleware = require('../middlewares/cachedMiddleware');

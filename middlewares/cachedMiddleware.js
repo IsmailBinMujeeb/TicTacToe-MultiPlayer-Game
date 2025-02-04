@@ -9,8 +9,6 @@ const cachedMiddleware = (key) => async (req, res, next) => {
 
         if (userProfile && key == 'query') return res.status(200).render('profilePage', { user, userProfile: JSON.parse(userProfile) });
         if (userProfile && key == 'params') return res.status(200).json(JSON.parse(userProfile));
-
-        console.log(userProfile, key)
         next()
     } catch (error) {
         console.log(error);
