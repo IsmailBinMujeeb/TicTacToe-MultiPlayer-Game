@@ -54,16 +54,26 @@ const roomRoomidUseridRout = (req, res) => {
 
 const waitingRoomsRout = async (req, res) => {
 
-    const user = req.isAuthenticated() ? req.user : null;
-    const rooms = await roomModel.find({}).lean();
-    res.render('waitingRoomsPage', { user, rooms });
+    try {
+        const user = req.isAuthenticated() ? req.user : null;
+        const rooms = await roomModel.find({}).lean();
+        res.render('waitingRoomsPage', { user, rooms });
+    } catch (error) {
+        logError(error.message);
+        res.status(500).json({ error: 'Internal server error' })
+    }
 }
 
 const leaderboardRout = async (req, res)=>{
     
-    const users = await userModel.find({}).sort({coins: -1}).limit(10);
-    const user = req.isAuthenticated() ? req.user : null;
-    res.render('leaderboardPage', { users, user });
+    try {
+        const users = await userModel.find({}).sort({coins: -1}).limit(10);
+        const user = req.isAuthenticated() ? req.user : null;
+        res.render('leaderboardPage', { users, user });
+    } catch (error) {
+        logError(error.message);
+        res.status(500).json({ error: 'Internal server error' })
+    }
 }
 
 const uploadPostRout = async (req, res) => {

@@ -56,7 +56,8 @@ const registerPostRout = async (req, res, next) => {
             })
         })
     } catch (error) {
-        logError(error)
+        logError(error);
+        res.status(500).json({ error: 'Internal server error' })
     }
 }
 
