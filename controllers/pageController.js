@@ -2,6 +2,8 @@ const redisClient = require('../config/redis-config')
 const userModel = require('../models/user-model');
 const roomModel = require('../models/room-model');
 const crypto = require('crypto');
+const uploadOnCloudinary = require('../Services/cloudinaryService');
+const { logError } = require('../Services/loggerService');
 
 const homeRout = (req, res) => {
 
@@ -10,17 +12,21 @@ const homeRout = (req, res) => {
 }
 
 const profileRouter = async (req, res) => {
-    const username = req.query.user;
-    const regUsername = new RegExp(`^${username}$`, 'i');
-    const userProfile = await userModel.findOne({ username: regUsername });
-    const user = req.isAuthenticated() ? req.user : null;
-
-    if (!userProfile) {
-        return res.status(404).send({ message: '404 user not found.' });
-    }
+    try {
+        const username = req.query.user;
+        const regUsername = new RegExp(`^${username}$`, 'i');
+        const userProfile = await userModel.findOne({ username: regUsername });
+        const user = req.isAuthenticated() ? req.user : null;
     
-    await redisClient.setEx(`user:${username}`, 3600, JSON.stringify(userProfile));
-    res.render('profilePage', { user, userProfile });
+        if (!userProfile) {
+            return res.status(404).send({ message: '404 user not found.' });
+        }
+        
+        await redisClient.setEx(`user:${username}`, 3600, JSON.stringify(userProfile));
+        res.render('profilePage', { user, userProfile });
+    } catch (error) {
+        logError(error.message)
+    }
 }
 
 const editProfileRout = (req, res) => {
@@ -64,7 +70,12 @@ const uploadPostRout = async (req, res) => {
     try {
 
         if (req.file) {
-            const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${req.file.destination}/${req.file.filename}`, name: req.body.name }, { new: true });
+
+            const cloudinaryURL = await uploadOnCloudinary(`${req.file.destination}/${req.file.filename}`)
+
+            if (!cloudinaryURL) return res.status(409).json({ error: 'Cloudinary upload failed' });
+
+            const user = await userModel.findOneAndUpdate({ _id: req.session.passport.user }, { profilePic: `${cloudinaryURL}`, name: req.body.name }, { new: true });
             req.user = user;
             await redisClient.del(`user:${user.username}`);
             await redisClient.setEx(`user:${user.username}`, 3600, JSON.stringify(user));

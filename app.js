@@ -20,7 +20,7 @@ const userModel = require('./models/user-model');
 const roomModel = require('./models/room-model');
 
 // Require Routes
-const pageRoutes = require('./routes/routes');
+const pageRoutes = require('./routes/pageRoutes');
 const userRoutes = require('./routes/userRoutes')
 const apiRoutes = require('./routes/apiRoutes');
 const { logError, logDebug } = require('./Services/loggerService');
