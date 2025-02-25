@@ -15,11 +15,14 @@ const flash = require('connect-flash');
 const axios = require('axios')
 const path = require('path');
 
-
+// Require Database Models
 const userModel = require('./models/user-model');
 const roomModel = require('./models/room-model');
-const routes = require('./routes/routes');
-const apis = require('./routes/apiRoutes');
+
+// Require Routes
+const pageRoutes = require('./routes/routes');
+const userRoutes = require('./routes/userRoutes')
+const apiRoutes = require('./routes/apiRoutes');
 const { logError, logDebug } = require('./Services/loggerService');
 
 const app = express();
@@ -240,9 +243,12 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
 })
 
-app.use('/', routes);
-app.use('/', apis);
+// Routes Middleware
+app.use('/', pageRoutes);
+app.use('/', userRoutes)
+app.use('/', apiRoutes);
 
+// IGNORE IT: Just to keep renderer ON
 setInterval(async () => {
     try {
         const response = await axios.get('https://tictactoe-q4q1.onrender.com/');
