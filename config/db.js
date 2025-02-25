@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
+const { logDebug, logError } = require('../Services/loggerService');
 
 module.exports = mongoose.connect(process.env.DB_CONN_STR)
-.then(() => { console.log('Connected To Database') })
-.catch(e=>console.log(e));
+.then(() => { logDebug('Connected to MongoDB') })
+.catch(e=>logError(e));

@@ -29,3 +29,17 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/callback?code=4%2F0ASVgi3LWiIUhGyvssW-8eNKF_cOxBs5Sz9OqxWEqRVjCUP3_q9ad7cGV79JaWer6MUYw9A&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none 302 3803.539","timestamp":"2025-02-04T17:23:26.066Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"GET / 304 88.559","timestamp":"2025-02-04T17:23:26.162Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 200 2425.534","timestamp":"2025-02-04T17:23:30.401Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to Redis","timestamp":"2025-02-25T16:00:42.850Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Running at http://localhost:3000","timestamp":"2025-02-25T16:00:43.154Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to MongoDB","timestamp":"2025-02-25T16:00:47.450Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 34.817","timestamp":"2025-02-25T16:00:56.656Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /login 304 8.045","timestamp":"2025-02-25T16:00:59.271Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/ 302 2.886","timestamp":"2025-02-25T16:01:04.755Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/callback?code=4%2F0ASVgi3JiE9jF64Yt19Xko03rd23-AElZ_Qip07DobhiXbsZ2TkLu8RHXeTzEX5GPG6hX5Q&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none 302 1712.970","timestamp":"2025-02-25T16:01:08.117Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 127.776","timestamp":"2025-02-25T16:01:08.254Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 304 846.204","timestamp":"2025-02-25T16:03:06.438Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /edit-profile 200 462.810","timestamp":"2025-02-25T16:03:11.139Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"POST /upload 302 1055.888","timestamp":"2025-02-25T16:03:18.591Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 200 334.469","timestamp":"2025-02-25T16:03:18.932Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 499.033","timestamp":"2025-02-25T16:04:54.403Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 304 292.785","timestamp":"2025-02-25T16:04:56.567Z"}

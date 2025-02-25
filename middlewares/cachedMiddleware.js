@@ -1,4 +1,5 @@
 const redisClient = require('../config/redis-config');
+const { logError } = require('../Services/loggerService');
 
 const cachedMiddleware = (key) => async (req, res, next) => {
 
@@ -11,7 +12,7 @@ const cachedMiddleware = (key) => async (req, res, next) => {
         if (userProfile && key == 'params') return res.status(200).json(JSON.parse(userProfile));
         next()
     } catch (error) {
-        console.log(error);
+        logError(error)
         next()
     }
 }

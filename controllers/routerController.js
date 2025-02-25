@@ -3,6 +3,7 @@ const userModel = require('../models/user-model');
 const roomModel = require('../models/room-model');
 const crypto = require('crypto')
 const bcrypt = require('bcryptjs');
+const { logError } = require('../Services/loggerService');
 
 const homeRout = (req, res) => {
 
@@ -136,7 +137,7 @@ const registerPostRout = async (req, res, next) => {
             })
         })
     } catch (error) {
-        console.log(error)
+        logError(error)
     }
 }
 

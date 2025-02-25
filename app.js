@@ -6,6 +6,7 @@ const conn = require('./config/db');
 const redisClient = require('./config/redis-config');
 const socketio = require('socket.io');
 const { createServer } = require('http');
+const morganLogger = require('./middlewares/loggerMiddleware');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -19,6 +20,7 @@ const userModel = require('./models/user-model');
 const roomModel = require('./models/room-model');
 const routes = require('./routes/routes');
 const apis = require('./routes/apiRoutes');
+const { logError, logDebug } = require('./Services/loggerService');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -160,14 +162,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(flash())
+app.use(flash());
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 9000000000000 },
-}))
+}));
+
+app.use(morganLogger);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -195,7 +199,7 @@ passport.use(new LocalStrategy(async (username, password, done) => {
             return done(null, user);
         })
     } catch (error) {
-        console.log(error)
+        logError(error)
     }
 }));
 
@@ -218,6 +222,7 @@ passport.use(new GoogleStrategy(
 
             done(null, user)
         } catch (error) {
+            logError(error)
             done(error, false)
         }
     }
@@ -242,8 +247,8 @@ setInterval(async () => {
     try {
         const response = await axios.get('https://tictactoe-q4q1.onrender.com/');
     } catch (error) {
-        console.error('Error fetching data:', error.message);
+        logError(error)
     }
 }, 300000);
 
-server.listen(PORT, () => { console.log(`Running at http://localhost:3000`) });
+server.listen(PORT, () => { logDebug(`Running at http://localhost:${PORT}`) });
