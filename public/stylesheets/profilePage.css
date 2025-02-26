@@ -13,8 +13,9 @@ body {
 
 main{
     display: flex;
-    justify-content: center;
-    align-items: top;
+    justify-content: top;
+    align-items: center;
+    flex-direction: column;
     min-height: 100vh;
     margin: 20px 0;
 }
@@ -84,6 +85,15 @@ main{
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 0.5rem;
+}
+
+.logout-link{
+    color: white;
+    padding: 10px 20px;
+    background-color: red;
+    border-radius: 10px;
+    text-decoration: none;
+    margin: 10px 0;
 }
 
 @media (max-width: 768px) {
