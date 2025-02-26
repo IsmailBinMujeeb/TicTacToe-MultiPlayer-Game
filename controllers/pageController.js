@@ -23,7 +23,7 @@ const profileRouter = async (req, res) => {
         }
         
         await redisClient.setEx(`user:${username}`, 3600, JSON.stringify(userProfile));
-        res.render('profilePage', { user, userProfile });
+        res.status(200).render('profilePage', { user, userProfile });
     } catch (error) {
         logError(error.message)
     }

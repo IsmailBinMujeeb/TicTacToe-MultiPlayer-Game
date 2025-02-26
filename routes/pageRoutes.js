@@ -6,7 +6,7 @@ const cachedMiddleware = require('../middlewares/cachedMiddleware');
 
 router.get('/', homeRout);
 
-router.get('/profile', isAuthenticated, cachedMiddleware('query'), profileRouter);
+router.get('/profile', isAuthenticated, profileRouter);
 
 router.get('/edit-profile', isAuthenticated, editProfileRout);
 
