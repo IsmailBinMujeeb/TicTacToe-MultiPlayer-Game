@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import './variabels.css';
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px;
+}
+
+.container {
+    position: relative;
+    display:  flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: bold;
+    text-shadow: 0 0 20px #ff66c4;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 0px transparent; }
+    to { text-shadow: 0 0 30px red; }
+}
+
+.error-message {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--text-secondary);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.home-button:hover {
+    background: var(--accent-dark);
+    transform: scale(1.1);
+}

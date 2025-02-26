@@ -1,9 +1,11 @@
 @import './variabels.css';
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 .navbar {
     display: flex;
     justify-content: right;
     align-items: center;
+    font-family: 'Varela Round', sans-serif;
     gap: 20px;
     padding: 1rem 2rem;
     background-color: #ffffff;

@@ -19,7 +19,7 @@ const profileRouter = async (req, res) => {
         const user = req.isAuthenticated() ? req.user : null;
     
         if (!userProfile) {
-            return res.status(404).send({ message: '404 user not found.' });
+            return res.status(404).render('404', { user });
         }
         
         await redisClient.setEx(`user:${username}`, 3600, JSON.stringify(userProfile));

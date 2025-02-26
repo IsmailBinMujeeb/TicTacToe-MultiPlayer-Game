@@ -1,0 +1,12 @@
+<%- include('layouts/header', {stylesheets: ['style', 'navbar', '404', 'footer'], title: '404 Page Not Found'}) %>
+<%- include('layouts/navbar', { user }) %>
+
+<main>
+  <div class="container">
+    <h2 class="error-code">404</h2>
+    <p class="error-message">Oops! Looks like you're lost.</p>
+    <a href="/" class="home-button">Go Home</a>
+  </div>
+</main>
+
+<%- include('layouts/footer', { scripts: ['hamburger'] }) %>

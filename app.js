@@ -175,7 +175,6 @@ app.use(session({
 }));
 
 app.use(morganLogger);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -247,6 +246,12 @@ passport.deserializeUser(async (id, done) => {
 app.use('/', pageRoutes);
 app.use('/', userRoutes)
 app.use('/', apiRoutes);
+
+// Rendering 404 page if no route match
+app.all('*', (req, res) => {
+    const user = req.isAuthenticated() ? req.user : null;
+    res.status(404).render('404', { user });
+});
 
 // IGNORE IT: Just to keep renderer ON
 setInterval(async () => {

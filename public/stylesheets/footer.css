@@ -1,8 +1,10 @@
 @import './variabels.css';
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 footer {
     background-color: #1c1c1e;
     color: #ffffff;
+    font-family: 'Varela Round', sans-serif;
     text-align: center;
     padding: 2rem 1rem;
     border-top: 4px solid var(--text-ternary);
