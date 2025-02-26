@@ -475,3 +475,45 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"GET / 304 94.073","timestamp":"2025-02-26T10:24:35.479Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 200 247.190","timestamp":"2025-02-26T10:24:37.326Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"GET /waiting-rooms 304 217.409","timestamp":"2025-02-26T10:24:45.081Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to Redis","timestamp":"2025-02-26T10:25:52.514Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Running at http://localhost:3000","timestamp":"2025-02-26T10:25:52.957Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to MongoDB","timestamp":"2025-02-26T10:25:54.224Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room 302 3.647","timestamp":"2025-02-26T10:25:56.659Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /login 304 10.809","timestamp":"2025-02-26T10:25:56.678Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/ 302 1.309","timestamp":"2025-02-26T10:25:58.393Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/callback?code=4%2F0AQSTgQGauw4SHlafFd7MWD-0-7uBC8WdvYZd-Jufglcc38TSpI3sCsAsszmBFUN7M7T2ew&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none 302 1025.823","timestamp":"2025-02-26T10:25:59.871Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 304 100.432","timestamp":"2025-02-26T10:25:59.980Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 304 216.665","timestamp":"2025-02-26T10:26:58.834Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 304 201.362","timestamp":"2025-02-26T10:28:12.425Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to Redis","timestamp":"2025-02-26T10:49:17.206Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Running at http://localhost:3000","timestamp":"2025-02-26T10:49:17.613Z"}
+{"level":"\u001b[34mdebug\u001b[39m","message":"Connected to MongoDB","timestamp":"2025-02-26T10:49:18.861Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 33.291","timestamp":"2025-02-26T10:49:24.129Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 6.451","timestamp":"2025-02-26T10:49:29.916Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room 302 2.980","timestamp":"2025-02-26T10:49:37.840Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /login 304 3.666","timestamp":"2025-02-26T10:49:37.850Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/ 302 1.903","timestamp":"2025-02-26T10:49:39.773Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/callback?code=4%2F0ASVgi3Kzfa1kgvI_JS8li50cb-m-SONUhV42pVAo4K736TfdZt-GdjSk2bxntJZTBTYvCw&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=none 302 1020.062","timestamp":"2025-02-26T10:49:41.747Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 109.925","timestamp":"2025-02-26T10:49:41.863Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room 302 0.904","timestamp":"2025-02-26T10:49:41.956Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /login 304 2.157","timestamp":"2025-02-26T10:49:41.964Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/ 302 1.127","timestamp":"2025-02-26T10:49:43.002Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /auth/google/callback?code=4%2F0ASVgi3LL9q1UDnYKNMudPArrWg8CaeG-HTNh_SyfYlqBjfeu2Nagmm7Ew5RGh713jPoq2Q&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none 302 475.110","timestamp":"2025-02-26T10:49:44.391Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 104.552","timestamp":"2025-02-26T10:49:44.501Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=ismailbinmujeeb 200 337.452","timestamp":"2025-02-26T10:49:47.029Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /edit-profile 200 144.270","timestamp":"2025-02-26T10:49:48.172Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"POST /upload 302 3496.063","timestamp":"2025-02-26T10:49:58.207Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=ismailbinmujeeb 200 203.103","timestamp":"2025-02-26T10:49:58.417Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room 302 98.727","timestamp":"2025-02-26T10:50:05.308Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room/a7e2ccba/67bead1b49adb35b3ceb045e 200 120.170","timestamp":"2025-02-26T10:50:05.433Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /waiting-rooms 200 183.900","timestamp":"2025-02-26T10:50:08.036Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room/a7e2ccba 302 97.276","timestamp":"2025-02-26T10:50:09.792Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /room/a7e2ccba/67beae7049adb35b3ceb04c9 200 96.173","timestamp":"2025-02-26T10:50:09.894Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 304 80.790","timestamp":"2025-02-26T10:50:55.630Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET / 200 115.920","timestamp":"2025-02-26T10:50:56.783Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=daredevildeveloper 200 260.614","timestamp":"2025-02-26T10:50:59.649Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /profile?user=ismailbinmujeeb 200 227.062","timestamp":"2025-02-26T10:51:00.652Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /leaderboard 200 237.173","timestamp":"2025-02-26T10:51:09.863Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /leaderboard 200 170.196","timestamp":"2025-02-26T10:51:13.073Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /api/leaderboard 200 540.200","timestamp":"2025-02-26T10:51:24.517Z"}
+{"level":"\u001b[32minfo\u001b[39m","message":"GET /favicon.ico 404 83.299","timestamp":"2025-02-26T10:51:24.755Z"}
