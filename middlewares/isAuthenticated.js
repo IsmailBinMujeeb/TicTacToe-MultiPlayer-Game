@@ -3,6 +3,6 @@ const isAuthenticated = (req, res, next) => {
         return next();
     }
     res.redirect('/login');
-}
+};
 
-module.exports = { isAuthenticated }
+module.exports = { isAuthenticated };

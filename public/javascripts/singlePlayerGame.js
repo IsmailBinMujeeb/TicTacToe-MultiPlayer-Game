@@ -9,17 +9,17 @@ let tips = [
     `Force a Draw If both players play optimally, Tic Tac Toe will always end in a draw. Focus on blocking your opponent and creating opportunities without leaving openings.`,
     `Practice Patterns Learn common patterns and strategies. The more you play, the better you’ll recognize winning opportunities and traps.`,
     `Play as Second Player (O) If you’re the second player, your goal is usually to force a draw. Focus on blocking and mirroring your opponent’s moves to prevent them from creating a fork.`,
-]
+];
 
-tipPara.innerText = tips[Math.floor(Math.random() * ((tips.length - 1) - 0 + 1))];
-console.log(Math.floor(Math.random() * (7 - 0 + 1)))
-document.addEventListener("DOMContentLoaded", () => {
-    const cells = document.querySelectorAll(".cell");
-    const statusText = document.getElementById("status");
-    const resetButton = document.getElementById("reset-button");
+tipPara.innerText = tips[Math.floor(Math.random() * (tips.length - 1 - 0 + 1))];
+console.log(Math.floor(Math.random() * (7 - 0 + 1)));
+document.addEventListener('DOMContentLoaded', () => {
+    const cells = document.querySelectorAll('.cell');
+    const statusText = document.getElementById('status');
+    const resetButton = document.getElementById('reset-button');
 
-    let currentPlayer = "X";
-    let board = ["", "", "", "", "", "", "", "", ""];
+    let currentPlayer = 'X';
+    let board = ['', '', '', '', '', '', '', '', ''];
     let isGameActive = true;
 
     const winningConditions = [
@@ -35,20 +35,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const handleCellClick = (e) => {
         const cell = e.target;
-        const index = cell.getAttribute("data-index");
+        const index = cell.getAttribute('data-index');
 
-        if (board[index] !== "" || !isGameActive) return;
+        if (board[index] !== '' || !isGameActive) return;
 
         board[index] = currentPlayer;
         cell.textContent = currentPlayer;
         checkResult();
 
-        if (isGameActive)
-            togglePlayer();
+        if (isGameActive) togglePlayer();
     };
 
     const togglePlayer = () => {
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         statusText.textContent = `Player ${currentPlayer}'s turn`;
     };
 
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        if (!board.includes("")) {
+        if (!board.includes('')) {
             statusText.textContent = "It's a draw! 😅";
             isGameActive = false;
         }
@@ -79,23 +78,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const highlightWinningCells = (indexes) => {
         indexes.forEach((index) => {
-            cells[index].style.backgroundColor = "#007BFF";
-            cells[index].style.color = "white";
+            cells[index].style.backgroundColor = '#007BFF';
+            cells[index].style.color = 'white';
         });
     };
 
     const resetGame = () => {
-        board = ["", "", "", "", "", "", "", "", ""];
+        board = ['', '', '', '', '', '', '', '', ''];
         isGameActive = true;
-        currentPlayer = "X";
+        currentPlayer = 'X';
         statusText.textContent = "Player X's turn";
         cells.forEach((cell) => {
-            cell.textContent = "";
-            cell.style.backgroundColor = '#e5e7eb'
-            cell.style.color = '#1f2937'
+            cell.textContent = '';
+            cell.style.backgroundColor = '#e5e7eb';
+            cell.style.color = '#1f2937';
         });
     };
 
-    cells.forEach((cell) => cell.addEventListener("click", handleCellClick));
-    resetButton.addEventListener("click", resetGame);
+    cells.forEach((cell) => cell.addEventListener('click', handleCellClick));
+    resetButton.addEventListener('click', resetGame);
 });

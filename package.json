@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "format": "prettier --write .",
+    "format-check": "prettier --check ."
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
+    "prettier": "^3.5.2",
     "winston": "^3.17.0"
   }
 }

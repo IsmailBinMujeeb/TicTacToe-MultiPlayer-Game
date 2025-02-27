@@ -1,0 +1,28 @@
+# Dependencies
+node_modules
+package*
+
+# Prettier
+.prettierrc
+
+# Ejs folders
+views/**/*.ejs
+
+# env
+.env
+.example.env
+
+# Docker
+.dockerignore
+Docker
+docker-compose.yml
+
+# Special Files
+README.md
+LICENSE
+
+# logs
+logs
+
+# Git
+.gitignore

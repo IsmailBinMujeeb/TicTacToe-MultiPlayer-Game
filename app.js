@@ -7,13 +7,13 @@ const { createServer } = require('http');
 const morganLogger = require('./middlewares/loggerMiddleware');
 const passport = require('passport');
 const flash = require('connect-flash');
-const axios = require('axios')
+const axios = require('axios');
 const path = require('path');
 require('./config/passportjs-config')(passport);
 
 // Require Routes
 const pageRoutes = require('./routes/pageRoutes');
-const userRoutes = require('./routes/userRoutes')
+const userRoutes = require('./routes/userRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 const { logError, logDebug } = require('./Services/loggerService');
 const socketHandler = require('./socket/socketHandler');
@@ -31,12 +31,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(flash());
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 9000000000000 },
-}));
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: { maxAge: 9000000000000 },
+    }),
+);
 
 app.use(morganLogger);
 app.use(passport.initialize());
@@ -44,7 +46,7 @@ app.use(passport.session());
 
 // Routes Middleware
 app.use('/', pageRoutes);
-app.use('/', userRoutes)
+app.use('/', userRoutes);
 app.use('/', apiRoutes);
 
 // Rendering 404 page if no route match
@@ -56,10 +58,14 @@ app.all('*', (req, res) => {
 // IGNORE IT: Just to keep renderer ON
 setInterval(async () => {
     try {
-        const response = await axios.get('https://tictactoe-q4q1.onrender.com/');
+        const response = await axios.get(
+            'https://tictactoe-q4q1.onrender.com/',
+        );
     } catch (error) {
-        logError(error)
+        logError(error);
     }
 }, 300000);
 
-server.listen(PORT, () => { logDebug(`Running at http://localhost:${PORT}`) });
+server.listen(PORT, () => {
+    logDebug(`Running at http://localhost:${PORT}`);
+});

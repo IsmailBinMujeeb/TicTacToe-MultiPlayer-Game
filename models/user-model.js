@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-
     name: {
         type: String,
-    }, 
+    },
 
     email: {
         type: String,
@@ -21,17 +20,18 @@ const userSchema = new mongoose.Schema({
 
     profilePic: {
         type: String,
-        default: 'http://res.cloudinary.com/dpjpkfwhw/image/upload/v1740503975/s6lutrulcbp7ksiuzplw.png'
+        default:
+            'http://res.cloudinary.com/dpjpkfwhw/image/upload/v1740503975/s6lutrulcbp7ksiuzplw.png',
     },
 
-    profileId:{
+    profileId: {
         type: String,
     },
 
     coins: {
         type: Number,
         default: 10,
-    }
-})
+    },
+});
 
 module.exports = mongoose.model('user', userSchema);

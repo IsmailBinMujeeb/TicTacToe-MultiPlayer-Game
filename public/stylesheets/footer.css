@@ -56,12 +56,14 @@ footer {
     text-decoration: none;
     color: #ffffff;
     font-size: 1.5rem;
-    transition: transform 0.3s ease, color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
 }
 
 .social-icons a:hover {
     transform: scale(1.2);
-    color: #007BFF;
+    color: #007bff;
 }
 
 .footer-bottom {

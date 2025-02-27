@@ -59,20 +59,18 @@ body {
     outline: none;
 }
 
-.login-opts{
-
+.login-opts {
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
     gap: 10px;
 }
 
-.login-opts button{
+.login-opts button {
     flex: 1;
 }
 
-.login-opts a{
-
+.login-opts a {
     flex: 1;
 }
 

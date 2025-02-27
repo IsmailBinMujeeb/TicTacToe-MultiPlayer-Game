@@ -1,9 +1,8 @@
 const socket = io({
-    transports: ['websocket']
+    transports: ['websocket'],
 });
 
 function addCard(username, profilePic, roomId) {
-
     const card = document.createElement('div');
     card.classList.add('card');
     card.dataset.id = roomId;
@@ -20,15 +19,18 @@ function removeCard(card) {
     card.addEventListener('animationend', () => {
         card.remove();
     });
-    console.log(document.getElementById('cardList').childElementCount, document.getElementById('cardList').lastChild)
+    console.log(
+        document.getElementById('cardList').childElementCount,
+        document.getElementById('cardList').lastChild,
+    );
 }
 
 socket.on('room-created', ({ roomId, user }) => {
-    addCard(user.username, user.profilePic.replace('/public', ''), roomId)
-})
+    addCard(user.username, user.profilePic.replace('/public', ''), roomId);
+});
 
 socket.on('room-full', ({ roomId }) => {
     const card = document.querySelector('.card[data-id="' + roomId + '"]');
-    console.log(card)
+    console.log(card);
     removeCard(card);
-})
+});
