@@ -42,20 +42,17 @@ const registerPostRout = async (req, res, next) => {
             return res.redirect('/signup');
         }
 
-        bcrypt.hash(password, 10, async (err, hash) => {
+
+        const newUser = await userModel.create({
+            name,
+            username,
+            email,
+            password,
+        });
+
+        req.login(newUser, (err) => {
             if (err) return next(err);
-
-            const newUser = await userModel.create({
-                name,
-                username,
-                email,
-                password: hash,
-            });
-
-            req.login(newUser, (err) => {
-                if (err) return next(err);
-                return res.redirect('/');
-            });
+            return res.redirect('/');
         });
     } catch (error) {
         logError(error);

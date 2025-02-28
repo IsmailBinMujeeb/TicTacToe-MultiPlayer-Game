@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const { logError } = require('../Services/loggerService');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -33,5 +35,17 @@ const userSchema = new mongoose.Schema({
         default: 10,
     },
 });
+
+userSchema.pre('save', async function (next) {
+
+    try {
+        if (!this.isModified("password")) return next();
+
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (error) {
+        logError(error)
+    }
+})
 
 module.exports = mongoose.model('user', userSchema);
