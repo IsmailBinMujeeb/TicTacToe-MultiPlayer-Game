@@ -1,5 +1,4 @@
 const userModel = require('../models/user-model');
-const bcrypt = require('bcryptjs');
 const { logError } = require('../Services/loggerService');
 
 const loginRout = (req, res) => {
@@ -42,7 +41,6 @@ const registerPostRout = async (req, res, next) => {
             return res.redirect('/signup');
         }
 
-
         const newUser = await userModel.create({
             name,
             username,
@@ -56,7 +54,8 @@ const registerPostRout = async (req, res, next) => {
         });
     } catch (error) {
         logError(error);
-        res.status(500).json({ error: 'Internal server error' });
+        req.flash('error', error.message.split(':')[2])
+        return res.redirect('/signup')
     }
 };
 

@@ -8,8 +8,7 @@ const usersApiRout = async (req, res) => {
         const regExpUsername = new RegExp(`^${req.params.user}$`, 'i');
 
         const user = await userModel
-            .findOne({ username: regExpUsername })
-            .select('-password');
+            .findOne({ username: regExpUsername });
 
         if (!user)
             return res
