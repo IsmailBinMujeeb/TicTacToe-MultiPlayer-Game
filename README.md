@@ -1,6 +1,8 @@
 # TicTacToe-MultiPlayer-Game
 Welcome to the TicTacToe Multiplayer Game! This application allows multiple players to engage in the classic TicTacToe game in real-time.
 
+[![wakatime](https://wakatime.com/badge/user/762eb31e-429a-48a8-a9ba-9fc3e5f7aeea/project/46264392-9758-4174-8a72-4ad8e5133fa8.svg?style=plastic)](https://wakatime.com/badge/user/762eb31e-429a-48a8-a9ba-9fc3e5f7aeea/project/46264392-9758-4174-8a72-4ad8e5133fa8)
+
 ## Features
 - Real-Time Multiplayer: Play TicTacToe with friends or other players in real-time.
 - User Authentication: Secure login and registration system to keep track of player statistics.
